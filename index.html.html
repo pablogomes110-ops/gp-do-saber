@@ -1,0 +1,1314 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="author" content="Prof. Pablo Antônio">
+<title>Grande Prêmio do Saber</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Russo+One&family=Rubik:wght@400;500;700&display=swap" rel="stylesheet">
+<script async src="https://cdn.jsdelivr.net/npm/peerjs@1.5.4/dist/peerjs.min.js" onerror="var s=document.createElement('script');s.src='https://unpkg.com/peerjs@1.5.4/dist/peerjs.min.js';document.head.appendChild(s)"></script>
+<style>
+:root{--asf:#1e2229;--asf2:#2b3038;--am:#ffc400;--vm:#e10600;--gr:#2f8f3a;--bg:#f1f1ec;--card:#fff;--ink:#16191e;--mut:#5b6270;--ln:#d9d9d1;--ok:#1b9a50;--no:#d93025;--azul:#1f5fd1;
+--fT:'Russo One',Impact,'Arial Black',sans-serif;--fB:'Rubik',system-ui,'Segoe UI',Roboto,Arial,sans-serif}
+*{box-sizing:border-box;min-width:0}
+html,body{margin:0}
+body{background:var(--bg);color:var(--ink);font:16px/1.5 var(--fB);overflow-x:clip}
+button,input,select,textarea{font:inherit;color:inherit}
+[hidden]{display:none!important}
+h1,h2,h3{font-family:var(--fT);font-weight:400;line-height:1.1;margin:0 0 .4em}
+:focus-visible{outline:3px solid #2a7bff;outline-offset:2px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:44px;padding:9px 18px;border-radius:10px;border:2px solid var(--asf);background:#fff;font-weight:700;cursor:pointer;transition:transform .12s,background .12s;text-decoration:none;color:var(--ink)}
+.btn:hover{transform:translateY(-1px)}.btn:active{transform:translateY(1px)}
+.btn.pri{background:var(--am);border-color:var(--am);color:#1a1a1a}
+.btn.red{background:var(--vm);border-color:var(--vm);color:#fff}
+.btn.ghost{background:transparent;border-color:currentColor;color:inherit}
+.btn.big{font-size:20px;min-height:56px;padding:12px 26px}
+.btn:disabled{opacity:.4;cursor:not-allowed;transform:none}
+.lnk{background:none;border:0;color:var(--azul);text-decoration:underline;cursor:pointer;padding:4px;font-size:14px}
+.row{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.kerb{height:10px;background:repeating-linear-gradient(90deg,var(--vm) 0 26px,#fff 26px 52px)}
+.check{height:16px;background:repeating-conic-gradient(#111 0 25%,#fff 0 50%) 0 0/16px 16px}
+.scroll{overflow-x:auto}
+
+/* ===== HOME / CONFIGURAÇÃO ===== */
+.hero{background:var(--asf);color:#fff;padding:clamp(22px,4vw,44px) max(4vw,16px) 0}
+.hero-in{max-width:1240px;margin:0 auto;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:24px;align-items:end}
+.hero h1{font-size:clamp(34px,5vw,56px);color:var(--am);text-wrap:balance}
+.hero p{color:#cfd4dc;max-width:52ch;margin:0 0 18px}
+.grid8{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px 14px;padding-bottom:16px}
+.grid8 svg{width:100%;height:auto}
+.resume{background:#fff4c2;border-bottom:2px solid var(--am);padding:12px max(4vw,16px)}
+.resume .row{max-width:1240px;margin:0 auto}
+.wrap{max-width:1240px;margin:0 auto;padding:22px max(4vw,16px) 60px}
+.tabs{display:flex;gap:6px;flex-wrap:wrap;border-bottom:3px solid var(--asf);margin-bottom:18px}
+.tab{border:0;background:#e2e2db;padding:12px 18px;border-radius:10px 10px 0 0;font-weight:700;cursor:pointer;min-height:44px}
+.tab[aria-selected=true]{background:var(--asf);color:var(--am)}
+.panel{display:none}.panel.on{display:block}
+.toolbar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:14px}
+.counter{font-weight:700;padding:8px 14px;border-radius:999px;background:#fff;border:2px solid var(--ln)}
+.counter.good{border-color:var(--ok);color:var(--ok)}.counter.warn{border-color:#e08a00;color:#a35f00}
+.qlist{display:grid;gap:14px}
+.qcard{background:#fff;border:2px solid var(--ln);border-left:8px solid #e08a00;border-radius:12px;padding:14px 16px}
+.qcard.ok{border-left-color:var(--ok)}
+.qcard header{display:flex;align-items:center;gap:10px;margin-bottom:8px}
+.qcard header b{font-family:var(--fT);font-weight:400;font-size:18px}
+.qstat{font-size:13px;color:#a35f00}.qcard.ok .qstat{color:var(--ok)}
+.qcard header .lnk{margin-left:auto;color:var(--no)}
+textarea,input[type=text],input[type=url],select{width:100%;border:2px solid var(--ln);border-radius:10px;padding:10px 12px;font-size:16px;background:#fff}
+textarea{resize:vertical;min-height:64px}
+.ops{display:grid;gap:8px;margin-top:10px}
+.op{display:flex;align-items:center;gap:8px}
+.op label{display:flex;align-items:center;gap:6px;cursor:pointer;flex:none;padding:4px}
+.op input[type=radio]{width:22px;height:22px;accent-color:var(--ok);margin:0}
+.lt{flex:none;width:34px;height:34px;border-radius:50%;display:grid;place-items:center;background:var(--asf);color:#fff;font-family:var(--fT)}
+.op input[type=text]{flex:1}
+.op.right input[type=text]{border-color:var(--ok);background:#effaf3}
+.hint{display:block;color:var(--mut);font-size:13px;margin-top:6px}
+.teams{display:grid;gap:10px;grid-template-columns:repeat(auto-fit,minmax(min(100%,340px),1fr))}
+.team{display:grid;grid-template-columns:90px minmax(0,1fr) auto;gap:12px;align-items:center;background:#fff;border:2px solid var(--ln);border-radius:12px;padding:10px 12px;border-left:8px solid var(--c)}
+.team small{color:var(--mut);display:block}
+.sw{display:flex;align-items:center;gap:6px;font-size:14px;cursor:pointer}
+.sw input{width:22px;height:22px;accent-color:var(--ok)}
+.sits{display:grid;gap:8px;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr))}
+.sit{display:flex;gap:10px;align-items:center}
+.sit b{flex:none;width:40px;height:40px;display:grid;place-items:center;border-radius:8px;background:var(--asf);color:var(--am);font-family:var(--fT);font-weight:400}
+.sit.last b{background:repeating-conic-gradient(#111 0 25%,#fff 0 50%) 0 0/10px 10px;color:#fff;text-shadow:0 0 3px #000}
+.cfg{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr))}
+.box{background:#fff;border:2px solid var(--ln);border-radius:12px;padding:16px}
+.box h3{font-size:19px}
+.box label{display:block;font-weight:500;margin:10px 0 4px}
+.rules{margin:0;padding-left:20px}.rules li{margin:4px 0}
+
+/* ===== PISTA ===== */
+.rbar{background:var(--asf);color:#fff;display:flex;flex-wrap:wrap;align-items:center;gap:10px;padding:8px max(2vw,10px)}
+.brand-s{font-family:var(--fT);color:var(--am);font-size:20px}
+.room{font-weight:700;background:var(--asf2);border-radius:999px;padding:6px 14px;font-size:14px}
+.room b{color:var(--am);letter-spacing:.12em;font-size:17px}
+.rbtns{margin-left:auto;display:flex;flex-wrap:wrap;gap:6px}
+.rbtns .btn{min-height:40px;padding:6px 12px;font-size:14px}
+.trackwrap{background:var(--gr);background-image:repeating-linear-gradient(90deg,rgba(255,255,255,.05) 0 40px,transparent 40px 80px);padding:12px max(1.5vw,8px)}
+.track{min-width:960px;background:var(--asf);border-radius:12px;padding:4px 0 8px;box-shadow:0 0 0 6px #fff,0 0 0 12px var(--vm),0 8px 24px rgba(0,0,0,.35)}
+.thead,.lane{display:grid;grid-template-columns:170px minmax(0,1fr)}
+.cells{display:grid;grid-template-columns:repeat(13,minmax(0,1fr))}
+.lblh{color:#9aa3ae;font-size:12px;padding:8px 10px;align-self:end}
+.hc{color:#e9edf2;text-align:center;padding:4px 3px 6px;font-size:11.5px;line-height:1.15;border-left:1px dashed rgba(255,255,255,.18);transition:background .3s}
+.hc b{display:block;font-family:var(--fT);font-weight:400;font-size:17px;color:var(--am)}
+.hc.fin{background:repeating-conic-gradient(#fff 0 25%,#111 0 50%) 0 0/14px 14px}
+.hc.fin b,.hc.fin span{background:#111;color:var(--am);border-radius:4px;padding:0 4px;display:inline-block}
+.hc.fin span{color:#fff;margin-top:2px}
+.hc.lead{background:rgba(255,196,0,.18)}
+.lane{border-top:2px dashed rgba(255,255,255,.25)}
+.lbl{display:flex;align-items:center;gap:8px;padding:3px 8px;color:#fff;border-left:7px solid var(--c);background:rgba(255,255,255,.04);transition:background .3s}
+.lbl strong{display:block;font-size:14px;line-height:1.15;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.lbl small{display:block;font-size:11.5px;color:#c4cad3;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;line-height:1.2}
+.lbl .txt{flex:1}
+.phone{flex:none;width:16px;height:22px;opacity:.25}.phone.on{opacity:1}
+.lane.hit .lbl{background:rgba(255,196,0,.35)}
+.road{position:relative;height:42px;background:repeating-linear-gradient(90deg,transparent 0 calc(100%/13 - 1px),rgba(255,255,255,.13) calc(100%/13 - 1px) calc(100%/13))}
+.startz{position:absolute;top:5px;bottom:5px;left:4px;width:calc(100%/13 - 8px);border:2px solid rgba(255,255,255,.45);border-left:0;border-radius:0 4px 4px 0}
+.finz{position:absolute;top:0;bottom:0;left:calc(100%*12/13);width:calc(100%/13);background:repeating-conic-gradient(rgba(255,255,255,.8) 0 25%,rgba(0,0,0,.55) 0 50%) 0 0/12px 12px}
+.car{position:absolute;top:50%;left:calc((var(--p) + .5) * 100% / 13);transform:translate(-50%,-50%);width:clamp(42px,calc(100%/13 - 8px),64px);transition:left 1s cubic-bezier(.55,0,.25,1);z-index:2}
+.car svg{display:block;width:100%;height:auto;filter:drop-shadow(0 2px 2px rgba(0,0,0,.5))}
+.car.go::before{content:"";position:absolute;right:88%;top:35%;width:70px;height:30%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.55));border-radius:4px;animation:trail 1s forwards}
+@keyframes trail{to{opacity:0}}
+.racegrid{display:grid;grid-template-columns:minmax(0,1.75fr) minmax(290px,1fr);gap:16px;padding:16px max(2vw,10px) 40px;max-width:1500px;margin:0 auto}
+.qpanel,.apanel{background:#fff;border-radius:14px;border:2px solid var(--ln);padding:18px}
+.qhead{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:10px}
+.qhead h2{font-size:22px;margin:0}
+.tmr{margin-left:auto;font-family:var(--fT);font-size:30px;background:var(--asf);color:var(--am);border-radius:10px;padding:2px 16px;min-width:96px;text-align:center}
+.tmr.low{background:var(--vm);color:#fff;animation:pulse .5s infinite alternate}
+.tmr.off{font-size:18px;padding:8px 14px}
+@keyframes pulse{to{transform:scale(1.06)}}
+.qbig{font-size:clamp(21px,2.1vw,30px);font-weight:500;white-space:pre-wrap;margin:6px 0 16px;line-height:1.35}
+.opts{display:grid;gap:9px}
+.opt{display:flex;gap:12px;align-items:center;padding:7px 14px;border:2px solid var(--ln);border-radius:12px;background:#fff;font-size:clamp(17px,1.5vw,22px)}
+.opt .lt{width:40px;height:40px;font-size:18px}
+.opt .ot{flex:1;white-space:pre-wrap}
+.opt.right{border-color:var(--ok);background:#e5f6ec}.opt.right .lt{background:var(--ok)}
+.opt.dim{opacity:.5}
+.dots{display:flex;gap:4px;flex-wrap:wrap;justify-content:flex-end}
+.dots i{width:16px;height:16px;border-radius:50%;background:var(--c);border:2px solid #fff;box-shadow:0 0 0 1px rgba(0,0,0,.3)}
+.ctrls{display:flex;flex-wrap:wrap;gap:10px;margin-top:16px}
+.adv{margin:14px 0 0;padding:12px 14px;background:#f6f6f2;border-radius:10px;font-size:15px}
+.adv p{margin:3px 0}
+.adv i{display:inline-block;width:12px;height:12px;border-radius:50%;background:var(--c);margin-right:6px}
+.intro p{color:var(--mut);max-width:62ch}
+.apanel h3{font-size:18px;display:flex;gap:8px;align-items:baseline;flex-wrap:wrap}
+.apanel h3 span{font-family:var(--fB);font-size:14px;color:var(--mut)}
+.arow{display:flex;align-items:center;gap:8px;padding:8px 0;border-top:1px solid #ecece6;flex-wrap:wrap}
+.arow .dot{flex:none;width:14px;height:14px;border-radius:50%;background:var(--c)}
+.arow b{font-size:15px}
+.arow .sp{flex:1}
+.chip{font-size:13px;font-weight:700;border-radius:999px;padding:3px 10px;background:#eceee9;white-space:nowrap}
+.chip.ok{background:#dff4e7;color:#11663a}.chip.no{background:#fde4e2;color:#a3221a}.chip.wait{background:#fff1c7;color:#7a5600}
+.mini{display:flex;gap:4px;flex-basis:100%;padding-left:22px}
+.ltb{width:36px;height:36px;border-radius:8px;border:2px solid var(--asf);background:#fff;font-family:var(--fT);cursor:pointer}
+.ltb:hover{background:var(--am)}
+.allok{margin-top:10px;font-weight:700;color:var(--ok)}
+.mhint{font-size:13px;color:var(--mut);margin:10px 0 0}
+
+/* ===== OVERLAYS ===== */
+.overlay{position:fixed;inset:0;background:rgba(10,12,16,.74);display:grid;place-items:center;z-index:50;padding:14px}
+.sheet{background:#fff;border-radius:16px;max-width:620px;width:100%;max-height:92vh;overflow:auto;padding:22px}
+.sheet.wide{max-width:900px}
+.sheet h2{font-size:24px}
+.sheet .row{margin-top:16px}
+.connGrid{display:grid;grid-template-columns:260px minmax(0,1fr);gap:20px;align-items:start}
+.qr{width:260px;height:260px;border:2px solid var(--ln);border-radius:12px;display:grid;place-items:center;text-align:center;font-size:13px;color:var(--mut);background:#fff;overflow:hidden}
+.qr img{width:100%;height:100%}
+.code{font-family:var(--fT);font-size:44px;letter-spacing:.14em;color:var(--asf);line-height:1}
+.linkbox{display:flex;gap:6px;margin:8px 0}
+.linkbox input{font-size:14px}
+.steps{padding-left:20px;margin:10px 0}.steps li{margin:4px 0}
+.ctable{width:100%;border-collapse:collapse;margin-top:14px;font-size:15px}
+.ctable td{padding:7px 6px;border-top:1px solid #ecece6}
+.ctable i{display:inline-block;width:12px;height:12px;border-radius:50%;background:var(--c);margin-right:6px}
+.warnbox{background:#fff4d6;border:2px solid #f0c24b;border-radius:10px;padding:10px 12px;font-size:14px;margin:10px 0}
+.errbox{background:#fde4e2;border:2px solid #f19a93;border-radius:10px;padding:10px 12px;font-size:14px;margin:10px 0}
+.lights{display:flex;gap:clamp(8px,2vw,18px);background:#0d0f12;padding:22px 26px;border-radius:18px;box-shadow:0 0 0 6px #333}
+.lamp{width:clamp(44px,10vw,78px);aspect-ratio:1;border-radius:50%;background:#2a0b0b;box-shadow:inset 0 0 0 4px #000}
+.lamp.on{background:radial-gradient(circle at 35% 35%,#ff9a90,#e10600 62%);box-shadow:0 0 34px #ff2a1a}
+.govai{font-family:var(--fT);font-size:clamp(60px,14vw,130px);color:var(--am);text-shadow:0 6px 0 #000}
+.lightsBox{display:grid;justify-items:center;gap:18px}
+.podium{text-align:center;max-width:720px}
+.podium .wcar{width:min(260px,70%);margin:0 auto}
+.podium h2{font-size:clamp(28px,4vw,40px)}
+.rank{width:100%;border-collapse:collapse;margin-top:12px;text-align:left;font-size:15px}
+.rank th{font-size:13px;color:var(--mut);font-weight:500;padding:6px}.rank th.n{text-align:right}
+.rank td{padding:7px 6px;border-top:1px solid #ecece6}
+.rank td.n{text-align:right;font-variant-numeric:tabular-nums}
+.rank i{display:inline-block;width:12px;height:12px;border-radius:50%;background:var(--c);margin-right:6px}
+.conf{position:fixed;top:-24px;width:10px;height:16px;z-index:70;pointer-events:none;animation:fall linear forwards}
+@keyframes fall{to{transform:translateY(112vh) rotate(760deg)}}
+.autor{text-align:center;font-size:14px;color:var(--mut);padding:14px 16px 22px}.autor b{color:var(--ink)}
+.hero .autor-h{color:#cfd4dc;font-size:14px;margin:0 0 14px}.hero .autor-h b{color:var(--am)}
+.rbar .autor-r{font-size:13px;color:#cfd4dc}
+.toast{position:fixed;left:50%;bottom:20px;transform:translateX(-50%);background:var(--asf);color:#fff;padding:12px 18px;border-radius:12px;z-index:80;font-weight:500;box-shadow:0 6px 20px rgba(0,0,0,.3);max-width:92vw}
+
+/* ===== CELULAR DO ALUNO ===== */
+#player{min-height:100vh;background:var(--bg)}
+.pbar{background:var(--asf);color:#fff;display:flex;align-items:center;gap:10px;padding:10px 14px;position:sticky;top:0;z-index:5}
+.pbar .room{margin-left:auto}
+.pbar .btn{min-height:38px;padding:4px 10px;font-size:13px}
+.pmain{max-width:560px;margin:0 auto;padding:16px 14px 50px}
+.pstatus{max-width:560px;margin:10px auto 0;padding:10px 14px;border-radius:10px;background:#fff4d6;border:2px solid #f0c24b;font-size:15px}
+.pcars{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:12px}
+.pcar{border:3px solid var(--c);border-radius:14px;background:#fff;padding:10px;cursor:pointer;display:grid;gap:4px;text-align:center;min-height:44px}
+.pcar svg{width:100%;height:auto}
+.pcar b{font-size:15px}.pcar small{color:var(--mut);font-size:13px}
+.pcar:disabled{opacity:.38;filter:grayscale(1);cursor:not-allowed}
+.pteam{display:grid;grid-template-columns:84px minmax(0,1fr);gap:12px;align-items:center;background:#fff;border-radius:14px;padding:10px 12px;border-left:8px solid var(--c)}
+.pteam b{font-family:var(--fT);font-weight:400;font-size:18px;display:block;line-height:1.1}
+.pteam small{color:var(--mut);display:block}
+.pprog{display:grid;grid-template-columns:repeat(13,minmax(0,1fr));gap:3px;margin:12px 0}
+.pc{height:12px;border-radius:3px;background:#d4d6da}
+.pc.done{background:var(--c)}.pc.cur{box-shadow:0 0 0 2px var(--asf)}
+.pc.fl{background:repeating-conic-gradient(#111 0 25%,#fff 0 50%) 0 0/6px 6px}
+.pcard{background:#fff;border-radius:14px;padding:16px;border:2px solid var(--ln)}
+.pcard h2{font-size:22px}
+.pq{font-size:19px;white-space:pre-wrap;margin:6px 0 14px;font-weight:500}
+.pops{display:grid;gap:9px}
+.pop{width:100%;display:flex;gap:12px;align-items:center;text-align:left;min-height:58px;padding:10px 12px;border-radius:14px;border:2px solid var(--ln);background:#fff;font-size:17px;cursor:pointer}
+.pop .ot{flex:1;white-space:pre-wrap}
+.pop:disabled{cursor:default}
+.pop.sel{border-color:var(--azul);background:#e8f0ff}.pop.sel .lt{background:var(--azul)}
+.pop.right{border-color:var(--ok);background:#e5f6ec}.pop.right .lt{background:var(--ok)}
+.pop.wrong{border-color:var(--no);background:#fdeaea}.pop.wrong .lt{background:var(--no)}
+.ptimer{font-family:var(--fT);font-size:22px;background:var(--asf);color:var(--am);border-radius:8px;padding:2px 12px;display:inline-block}
+.ptimer.low{background:var(--vm);color:#fff}
+.banner{border-radius:12px;padding:14px;font-weight:700;font-size:18px;margin:0 0 12px;text-align:center}
+.banner.ok{background:#dff4e7;color:#11663a}.banner.no{background:#fde4e2;color:#a3221a}.banner.neu{background:#eef0f3}
+.pmsg{color:var(--mut);margin:12px 0 0;text-align:center}
+.codeIn{font-family:var(--fT);font-size:30px;letter-spacing:.2em;text-transform:uppercase;text-align:center}
+
+@media (max-width:1000px){.racegrid{grid-template-columns:minmax(0,1fr)}}
+@media (max-width:700px){.hero-in{grid-template-columns:minmax(0,1fr)}.connGrid{grid-template-columns:minmax(0,1fr)}.qr{margin:0 auto}.team{grid-template-columns:70px minmax(0,1fr)}.team .sw{grid-column:1/-1}}
+#lockO{background:var(--asf);z-index:45}
+#lockO .sheet{max-width:440px;text-align:center}
+#lockO input{font-size:24px;text-align:center;letter-spacing:.2em;margin:10px 0 4px}
+.lockErr{color:var(--no);font-weight:700;min-height:1.5em;margin:0}
+.pinStat{font-weight:700}.pinStat.on{color:var(--ok)}
+#printArea{display:none}
+@media print{body.printing>*:not(#printArea){display:none!important}body.printing #printArea{display:block}body.printing{background:#fff}}
+#printArea{font:12pt/1.4 var(--fB);color:#000;padding:0 4mm}
+#printArea h1{font-size:20pt;margin:0 0 2mm}#printArea h2{font-size:14pt;margin:6mm 0 2mm}
+#printArea .meta{color:#444;margin:0 0 4mm}
+#printArea table{width:100%;border-collapse:collapse;font-size:10.5pt;margin-bottom:3mm}
+#printArea th,#printArea td{border:1px solid #999;padding:3px 5px;text-align:left;vertical-align:top}
+#printArea th{background:#eee}#printArea td.n,#printArea th.n{text-align:right}
+#printArea .q{page-break-inside:avoid;margin-bottom:4mm}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+</head>
+<body>
+
+<!-- ============ TELA DO PROFESSOR: CONFIGURAÇÃO ============ -->
+<section id="home">
+  <div class="hero">
+    <div class="hero-in">
+      <div>
+        <h1>Grande Prêmio do Saber</h1>
+        <p class="autor-h">Autoria: <b>Prof. Pablo Antônio</b></p>
+        <p>Corrida de perguntas para até 8 equipes. Cada acerto faz o carro avançar um trecho da pista. Vence a equipe que cruzar primeiro a faixa de chegada.</p>
+        <div class="row" style="padding-bottom:22px">
+          <button class="btn pri big" id="goTrack">Ir para a pista</button>
+          <button class="btn ghost" id="iAmStudent">Sou aluno: entrar com código</button>
+        </div>
+      </div>
+      <div class="grid8" id="heroCars" aria-hidden="true"></div>
+    </div>
+  </div>
+  <div class="check"></div>
+  <div class="resume" id="resumeBar" hidden>
+    <div class="row"><strong>Há uma corrida em andamento.</strong><span id="resumeInfo"></span><button class="btn pri" id="resumeBtn">Continuar corrida</button></div>
+  </div>
+  <div class="wrap">
+    <div class="tabs" role="tablist">
+      <button class="tab" role="tab" aria-selected="true" data-tab="pQ">Banco de questões</button>
+      <button class="tab" role="tab" aria-selected="false" data-tab="pT">Equipes e carros</button>
+      <button class="tab" role="tab" aria-selected="false" data-tab="pS">Trechos da pista</button>
+      <button class="tab" role="tab" aria-selected="false" data-tab="pC">Regras e ajustes</button>
+    </div>
+
+    <div class="panel on" id="pQ">
+      <div class="toolbar">
+        <span class="counter" id="qCount"></span>
+        <button class="btn" id="addQ">+ Adicionar questão</button>
+        <button class="btn" id="pasteQ">Colar várias questões</button>
+        <button class="btn" id="sampleQ">Carregar 15 questões de exemplo</button>
+        <button class="btn" id="exportQ">Salvar em arquivo</button>
+        <label class="btn" for="importF" tabindex="0">Abrir arquivo</label>
+        <input type="file" id="importF" accept=".json,application/json" hidden>
+        <button class="lnk" id="clearQ" style="color:var(--no)">Apagar todas</button>
+      </div>
+      <p class="hint" style="margin:-4px 0 14px">Escreva o enunciado, preencha as 5 alternativas e marque o círculo da correta. Tudo é salvo automaticamente neste navegador. Questões incompletas ficam de fora da corrida.</p>
+      <div class="qlist" id="qList"></div>
+      <div class="row" style="margin-top:14px"><button class="btn" id="addQ2">+ Adicionar questão</button></div>
+    </div>
+
+    <div class="panel" id="pT">
+      <p class="hint" style="margin-top:0">Dê um nome a cada equipe. Desmarque “Participa” nos carros que não forem usados nesta turma.</p>
+      <div class="teams" id="teamList"></div>
+    </div>
+
+    <div class="panel" id="pS">
+      <p class="hint" style="margin-top:0">A pista tem 12 trechos. Cada trecho representa uma situação da corrida e o nome aparece no telão e no celular das equipes. O trecho 12 é a faixa de chegada.</p>
+      <div class="sits" id="sitList"></div>
+      <div class="row" style="margin-top:14px"><button class="btn" id="sitReset">Restaurar nomes padrão</button></div>
+    </div>
+
+    <div class="panel" id="pC">
+      <div class="cfg">
+        <div class="box">
+          <h3>Ajustes da corrida</h3>
+          <label for="cTempo">Tempo para responder cada questão</label>
+          <select id="cTempo">
+            <option value="0">Sem limite de tempo</option><option value="20">20 segundos</option><option value="30">30 segundos</option><option value="45">45 segundos</option><option value="60">1 minuto</option><option value="90">1 min e 30 s</option><option value="120">2 minutos</option><option value="180">3 minutos</option><option value="300">5 minutos</option>
+          </select>
+          <label class="sw" style="margin-top:14px"><input type="checkbox" id="cShuffle"> Sortear a ordem das questões</label>
+          <label class="sw" style="margin-top:8px"><input type="checkbox" id="cSom"> Sons ligados</label>
+          <label for="cUrl">Endereço público do jogo (para os celulares)</label>
+          <input type="url" id="cUrl" placeholder="https://seuusuario.github.io/gp-do-saber/">
+          <span class="hint">Preencha só se você abrir o jogo direto do arquivo no computador. Quando o jogo está publicado na internet, o endereço é detectado sozinho.</span>
+        </div>
+        <div class="box">
+          <h3>Senha do professor</h3>
+          <p style="margin:0 0 8px">Bloqueia as abas de configuração e a pista neste computador. Os celulares das equipes continuam entrando só com o código da sala.</p>
+          <p class="pinStat" id="pinStat"></p>
+          <div class="row"><button class="btn pri" id="pinSet"></button><button class="btn" id="pinLock">Bloquear agora</button><button class="lnk" id="pinDel" style="color:var(--no)">Remover senha</button></div>
+        </div>
+        <div class="box">
+          <h3>Como funciona</h3>
+          <ol class="rules">
+            <li>Cada equipe controla um carro. Todos começam na largada.</li>
+            <li>A mesma questão aparece no telão e nos celulares de todas as equipes.</li>
+            <li>Cada equipe escolhe uma das 5 alternativas (pelo celular ou mostrando ao professor).</li>
+            <li>Ao revelar a resposta, quem acertou avança 1 trecho. Quem errou ou não respondeu fica parado.</li>
+            <li>Vence quem chegar primeiro ao trecho 12, a faixa de chegada. Se duas equipes chegarem na mesma rodada, vence quem respondeu certo mais rápido.</li>
+            <li>Se as questões acabarem antes, o professor pode repetir as questões com erro ou encerrar: vence quem estiver mais à frente (desempate: mais acertos, depois menor tempo).</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </div>
+  <footer class="autor">Grande Prêmio do Saber · Autoria: <b>Prof. Pablo Antônio</b></footer>
+</section>
+
+<!-- ============ TELA DO PROFESSOR: PISTA ============ -->
+<section id="race" hidden>
+  <header class="rbar">
+    <span class="brand-s">Grande Prêmio do Saber</span>
+    <span class="autor-r">por Prof. Pablo Antônio</span>
+    <span class="room" id="roomBadge">Celulares desligados</span>
+    <nav class="rbtns">
+      <button class="btn ghost" id="bConn">Conectar celulares</button>
+      <button class="btn ghost" id="bSom">Som ligado</button>
+      <button class="btn ghost" id="bFull">Tela cheia</button>
+      <button class="btn ghost" id="bRel">Relatório</button>
+      <button class="btn ghost" id="bLock" hidden>Bloquear</button>
+      <button class="btn ghost" id="bCfg">Configurar</button>
+    </nav>
+  </header>
+  <div class="trackwrap scroll"><div class="track" id="track"></div></div>
+  <div class="racegrid">
+    <section class="qpanel" id="qPanel"></section>
+    <aside class="apanel">
+      <h3>Respostas das equipes <span id="aCount"></span></h3>
+      <div id="aRows"></div>
+      <p class="mhint">Equipe sem celular? Ela mostra a letra e você clica no botão correspondente (A a E) na linha dela.</p>
+    </aside>
+  </div>
+  <footer class="autor">Grande Prêmio do Saber · Autoria: <b>Prof. Pablo Antônio</b></footer>
+</section>
+
+<!-- ============ CELULAR DO ALUNO ============ -->
+<section id="player" hidden>
+  <header class="pbar">
+    <span class="brand-s">GP do Saber</span>
+    <span class="room" id="pCode"></span>
+    <button class="btn ghost" id="pSom">Som</button>
+  </header>
+  <div class="pstatus" id="pStatus" hidden></div>
+  <main class="pmain" id="pMain"></main>
+  <footer class="autor">Grande Prêmio do Saber · Autoria: <b>Prof. Pablo Antônio</b></footer>
+</section>
+
+<!-- ============ JANELAS ============ -->
+<div class="overlay" id="lockO" hidden><div class="sheet" role="dialog" aria-modal="true" aria-labelledby="lockT">
+  <div class="check" style="margin:-22px -22px 16px"></div>
+  <h2 id="lockT">Área do professor</h2>
+  <p>Esta área está protegida por senha. Digite a senha do professor para configurar e conduzir a corrida.</p>
+  <input type="password" id="lockPin" autocomplete="current-password" aria-label="Senha do professor">
+  <p class="lockErr" id="lockErr"></p>
+  <div class="row" style="justify-content:center"><button class="btn pri big" id="lockGo">Entrar</button></div>
+  <div class="row" style="justify-content:center"><button class="btn" id="lockStudent">Sou aluno: entrar com código</button></div>
+  <p style="margin:14px 0 0"><button class="lnk" id="lockForgot">Esqueci a senha</button></p>
+</div></div>
+<div class="overlay" id="modal" hidden><div class="sheet" role="dialog" aria-modal="true"><div id="mBody"></div><div class="row" id="mBtns"></div></div></div>
+<div class="overlay" id="connP" hidden><div class="sheet wide" role="dialog" aria-modal="true"><div id="connBody"></div><div class="row"><button class="btn pri" id="connClose">Fechar</button></div></div></div>
+<div class="overlay" id="lightsO" hidden><div class="lightsBox"><div class="lights" id="lamps"></div><div class="govai" id="goTxt">&nbsp;</div></div></div>
+<div class="overlay" id="podiumO" hidden><div class="sheet podium" id="podiumBody"></div></div>
+<div class="toast" id="toast" hidden></div>
+<div id="printArea"></div>
+
+<script>
+(() => {
+'use strict';
+const $ = s => document.querySelector(s);
+const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const L = 'ABCDE';
+const PREFIX = 'gpsaber-mat-';
+const ICE = [{urls:'stun:stun.l.google.com:19302'},{urls:'stun:stun1.l.google.com:19302'},{urls:'stun:global.stun.twilio.com:3478'}];
+const CARS = [
+  {cor:'Vermelho', hex:'#e53935', nome:'Equipe Vermelha'},
+  {cor:'Azul',     hex:'#1f5fd1', nome:'Equipe Azul'},
+  {cor:'Verde',    hex:'#2e9d4a', nome:'Equipe Verde'},
+  {cor:'Amarelo',  hex:'#f2c200', nome:'Equipe Amarela'},
+  {cor:'Laranja',  hex:'#f57c00', nome:'Equipe Laranja'},
+  {cor:'Roxo',     hex:'#7b3fc4', nome:'Equipe Roxa'},
+  {cor:'Rosa',     hex:'#e2408f', nome:'Equipe Rosa'},
+  {cor:'Ciano',    hex:'#00a5c2', nome:'Equipe Ciano'}
+];
+const SIT_DEF = ['Reta dos Números','Curva da Atenção','Túnel do Raciocínio','Ponte das Equações','Chicane dos Sinais','Pit Stop do Pensamento','Subida da Persistência','Curva em S do Gráfico','Reta dos Boxes','Descida Veloz','Curva Final','Faixa de Chegada'];
+const SAMPLE = [
+ ['Na função f(x) = 3x − 5, qual é o valor de f(4)?',['7','12','17','−2','9'],0],
+ ['O coeficiente angular da função f(x) = −2x + 7 é:',['7','−2','2','−7','5'],1],
+ ['O gráfico de f(x) = 4x + 1 corta o eixo y no ponto:',['(0, 4)','(1, 0)','(0, 1)','(4, 1)','(−1, 0)'],2],
+ ['Qual é a raiz (zero) da função f(x) = 2x − 8?',['x = −4','x = 8','x = 2','x = 4','x = 16'],3],
+ ['A função f(x) = −5x + 3 é:',['crescente','constante','decrescente','quadrática','crescente e depois decrescente'],2],
+ ['Uma corrida de táxi custa R$ 5,00 de bandeirada mais R$ 2,50 por quilômetro. Qual função representa o preço P de uma corrida de x km?',['P(x) = 5x + 2,5','P(x) = 2,5x + 5','P(x) = 7,5x','P(x) = 2,5x − 5','P(x) = 5x − 2,5'],1],
+ ['Nesse mesmo táxi, quanto custa uma corrida de 8 km?',['R$ 20,00','R$ 40,00','R$ 25,00','R$ 45,00','R$ 27,50'],2],
+ ['A reta que passa pelos pontos (0, 2) e (2, 8) tem coeficiente angular igual a:',['2','4','6','3','5'],3],
+ ['Qual das funções abaixo é crescente?',['f(x) = −x + 10','f(x) = 6','f(x) = −3x','f(x) = −0,5x + 1','f(x) = 0,5x − 4'],4],
+ ['Se f(x) = ax + 3 e f(2) = 11, então o valor de a é:',['4','7','5,5','3','8'],0],
+ ['Para quais valores de x a função f(x) = x − 6 é positiva?',['x < 6','x > −6','x > 6','x = 6','x < −6'],2],
+ ['Uma caixa d\'água tem 500 litros e perde 20 litros por hora. Em quantas horas ela ficará vazia?',['20 horas','25 horas','30 horas','480 horas','50 horas'],1],
+ ['O gráfico de uma função afim é sempre:',['uma parábola','uma curva exponencial','uma circunferência','uma hipérbole','uma reta'],4],
+ ['Na função f(x) = 7 − x, o coeficiente linear é:',['−1','1','−7','7','0'],3],
+ ['Um vendedor recebe R$ 1.200,00 fixos mais 5% sobre o valor que vende no mês. Se vender R$ 8.000,00, quanto receberá?',['R$ 1.600,00','R$ 1.240,00','R$ 9.200,00','R$ 2.000,00','R$ 1.400,00'],0]
+];
+const KEY = 'gpsaber_v1', RKEY = 'gpsaber_corrida_v1', TKEY = 'gpsaber_token';
+const lsGet = k => { try { return JSON.parse(localStorage.getItem(k)); } catch (e) { return null; } };
+const lsSet = (k, v) => { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) {} };
+const sleep = ms => new Promise(r => setTimeout(r, ms));
+const shuffle = a => { for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; };
+const blankQ = () => ({txt:'', ops:['','','','',''], c:-1});
+const qOk = q => q && String(q.txt).trim() && q.ops.length === 5 && q.ops.every(o => String(o).trim()) && q.c >= 0 && q.c < 5;
+
+/* ---------- dados do professor ---------- */
+let D = lsGet(KEY);
+if (!D || !Array.isArray(D.questions)) D = {};
+D.questions = (D.questions || []).filter(q => q && Array.isArray(q.ops)).map(q => ({txt:String(q.txt||''), ops:[0,1,2,3,4].map(j => String(q.ops[j]||'')), c: Number.isInteger(q.c) ? q.c : -1}));
+while (D.questions.length < 15) D.questions.push(blankQ());
+D.groups = CARS.map((c, i) => ({nome: (D.groups && D.groups[i] && D.groups[i].nome) || c.nome, ativo: D.groups && D.groups[i] ? D.groups[i].ativo !== false : true}));
+D.sit = Array.isArray(D.sit) && D.sit.length === 12 ? D.sit.map((s, i) => String(s || SIT_DEF[i])) : SIT_DEF.slice();
+D.cfg = Object.assign({tempo:60, embaralhar:true, som:true, url:'', pin:''}, D.cfg || {});
+const save = () => lsSet(KEY, D);
+
+/* ---------- sons (gerados pelo navegador, sem arquivos) ---------- */
+let MODE = 'host';
+const P = {};
+const soundOn = () => MODE === 'player' ? P.som !== false : D.cfg.som !== false;
+const Snd = {
+  c: null,
+  ctx() {
+    if (!this.c) { const A = window.AudioContext || window.webkitAudioContext; if (!A) return null; try { this.c = new A(); } catch (e) { return null; } }
+    if (this.c.state === 'suspended') this.c.resume().catch(() => {});
+    return this.c;
+  },
+  tone(f, d, o = {}) {
+    if (!soundOn()) return; const c = this.ctx(); if (!c) return;
+    const t = c.currentTime + (o.at || 0), os = c.createOscillator(), g = c.createGain();
+    os.type = o.type || 'sine'; os.frequency.setValueAtTime(f, t);
+    if (o.to) os.frequency.exponentialRampToValueAtTime(o.to, t + d);
+    g.gain.setValueAtTime(0.0001, t); g.gain.exponentialRampToValueAtTime(o.v || .2, t + .015); g.gain.exponentialRampToValueAtTime(0.0001, t + d);
+    os.connect(g); g.connect(c.destination); os.start(t); os.stop(t + d + .05);
+  },
+  noise(d, o = {}) {
+    if (!soundOn()) return; const c = this.ctx(); if (!c) return;
+    const t = c.currentTime + (o.at || 0), n = Math.floor(c.sampleRate * d), b = c.createBuffer(1, n, c.sampleRate), ch = b.getChannelData(0);
+    for (let i = 0; i < n; i++) ch[i] = Math.random() * 2 - 1;
+    const s = c.createBufferSource(), f = c.createBiquadFilter(), g = c.createGain();
+    s.buffer = b; f.type = 'bandpass'; f.Q.value = 1.2; f.frequency.setValueAtTime(o.f1 || 300, t); f.frequency.exponentialRampToValueAtTime(o.f2 || 3000, t + d);
+    g.gain.setValueAtTime(0.0001, t); g.gain.exponentialRampToValueAtTime(o.v || .3, t + d * .4); g.gain.exponentialRampToValueAtTime(0.0001, t + d);
+    s.connect(f); f.connect(g); g.connect(c.destination); s.start(t); s.stop(t + d);
+  },
+  engine() {
+    if (!soundOn()) return; const c = this.ctx(); if (!c) return;
+    const t = c.currentTime, f = c.createBiquadFilter(), g = c.createGain();
+    f.type = 'lowpass'; f.frequency.setValueAtTime(700, t); f.frequency.linearRampToValueAtTime(1800, t + .8);
+    g.gain.setValueAtTime(0.0001, t); g.gain.exponentialRampToValueAtTime(.22, t + .08); g.gain.setValueAtTime(.22, t + .6); g.gain.exponentialRampToValueAtTime(0.0001, t + 1);
+    [['sawtooth', 70, 260], ['square', 35, 130]].forEach(([ty, a, b]) => { const o = c.createOscillator(); o.type = ty; o.frequency.setValueAtTime(a, t); o.frequency.exponentialRampToValueAtTime(b, t + .75); o.connect(f); o.start(t); o.stop(t + 1.05); });
+    f.connect(g); g.connect(c.destination);
+  },
+  beep() { this.tone(880, .12, {type:'square', v:.08}); },
+  light() { this.tone(440, .3, {type:'square', v:.1}); },
+  go() { this.tone(880, .6, {type:'square', v:.12}); this.tone(1320, .6, {type:'triangle', v:.12}); },
+  click() { this.tone(1100, .05, {type:'square', v:.05}); },
+  ok() { [523, 659, 784, 1047].forEach((f, i) => this.tone(f, .22, {type:'triangle', v:.22, at:i * .09})); },
+  bad() { this.tone(220, .4, {type:'sawtooth', v:.12, to:110}); this.tone(233, .4, {type:'square', v:.05, to:116}); },
+  buzz() { this.tone(160, .7, {type:'sawtooth', v:.15}); this.tone(120, .7, {type:'square', v:.06}); },
+  whoosh() { this.noise(.55, {f1:250, f2:3500, v:.28}); },
+  fanfare() { [[523,0,.14],[523,.15,.14],[523,.3,.14],[659,.45,.4],[587,.9,.14],[659,1.05,.14],[784,1.2,.8]].forEach(([f, a, d]) => { this.tone(f, d, {type:'triangle', v:.24, at:a}); this.tone(f / 2, d, {type:'square', v:.05, at:a}); }); }
+};
+
+/* ---------- desenho do carro ---------- */
+function carSVG(hex, n) {
+  return `<svg viewBox="0 0 74 38" aria-hidden="true"><ellipse cx="37" cy="33" rx="31" ry="4" fill="rgba(0,0,0,.28)"/>
+  <rect x="9" y="3" width="13" height="8" rx="2.5" fill="#15171a"/><rect x="9" y="27" width="13" height="8" rx="2.5" fill="#15171a"/>
+  <rect x="47" y="4" width="11" height="7" rx="2.5" fill="#15171a"/><rect x="47" y="27" width="11" height="7" rx="2.5" fill="#15171a"/>
+  <rect x="2" y="7" width="7" height="24" rx="2" fill="${hex}" stroke="rgba(0,0,0,.45)"/>
+  <path d="M8 13 Q11 10 23 11 L51 14 Q66 15 70 19 Q66 23 51 24 L23 27 Q11 28 8 25 Z" fill="${hex}" stroke="rgba(0,0,0,.45)"/>
+  <rect x="63" y="9" width="6" height="20" rx="2" fill="${hex}" stroke="rgba(0,0,0,.45)"/>
+  <path d="M14 15.5 L44 16.5" stroke="rgba(255,255,255,.55)" stroke-width="1.6" stroke-linecap="round"/>
+  <ellipse cx="34" cy="19" rx="7.5" ry="4.3" fill="#1b1d21"/><circle cx="33" cy="19" r="2.8" fill="#fff"/>
+  <circle cx="51" cy="19" r="4.4" fill="#fff"/><text x="51" y="21.8" text-anchor="middle" font-size="7.5" font-family="Arial,sans-serif" font-weight="700" fill="#111">${n}</text></svg>`;
+}
+const phoneSVG = on => `<svg class="phone ${on ? 'on' : ''}" viewBox="0 0 16 22" aria-label="${on ? 'celular conectado' : 'sem celular'}"><rect x="1" y="1" width="14" height="20" rx="3" fill="none" stroke="#fff" stroke-width="2"/><circle cx="8" cy="17" r="1.4" fill="#fff"/></svg>`;
+
+function toast(msg, ms = 2600) { const t = $('#toast'); t.textContent = msg; t.hidden = false; clearTimeout(t._h); t._h = setTimeout(() => t.hidden = true, ms); }
+
+function modal(html, btns) {
+  return new Promise(res => {
+    $('#mBody').innerHTML = html;
+    $('#mBtns').innerHTML = btns.map((b, i) => `<button class="btn ${b.cls || ''}" data-i="${i}">${esc(b.t)}</button>`).join('');
+    $('#modal').hidden = false;
+    const f = $('#mBody').querySelector('textarea,input') || $('#mBtns button'); if (f) setTimeout(() => f.focus(), 30);
+    $('#mBtns').onclick = e => { const b = e.target.closest('button'); if (!b) return; $('#modal').hidden = true; res(btns[+b.dataset.i].v); };
+  });
+}
+
+/* =======================================================
+   CONFIGURAÇÃO (PROFESSOR)
+   ======================================================= */
+function renderHeroCars() { $('#heroCars').innerHTML = CARS.map((c, i) => carSVG(c.hex, i + 1)).join(''); }
+
+function qCardHTML(q, i) {
+  return `<article class="qcard ${qOk(q) ? 'ok' : ''}" data-i="${i}">
+   <header><b>Questão ${i + 1}</b><span class="qstat">${qStatus(q)}</span><button class="lnk del" type="button">Excluir</button></header>
+   <textarea class="qtxt" rows="2" placeholder="Digite o enunciado da questão ${i + 1}">${esc(q.txt)}</textarea>
+   <div class="ops">${q.ops.map((o, j) => `<div class="op ${q.c === j ? 'right' : ''}"><label title="Marcar ${L[j]} como correta"><input type="radio" name="c${i}" value="${j}" ${q.c === j ? 'checked' : ''}><span class="lt">${L[j]}</span></label><input type="text" class="opt" data-j="${j}" value="${esc(o)}" placeholder="Alternativa ${L[j]}" aria-label="Alternativa ${L[j]} da questão ${i + 1}"></div>`).join('')}</div>
+   <span class="hint">Marque o círculo ao lado da alternativa correta.</span>
+  </article>`;
+}
+function qStatus(q) {
+  if (qOk(q)) return 'Completa · correta: ' + L[q.c];
+  const f = []; if (!q.txt.trim()) f.push('enunciado'); const m = q.ops.filter(o => !o.trim()).length; if (m) f.push(m + ' alternativa' + (m > 1 ? 's' : '')); if (q.c < 0) f.push('marcar a correta');
+  return 'Falta: ' + f.join(', ');
+}
+function renderQList() { $('#qList').innerHTML = D.questions.map(qCardHTML).join(''); updCount(); }
+function updCount() {
+  const n = D.questions.filter(qOk).length, el = $('#qCount');
+  el.textContent = `${n} ${n === 1 ? 'questão completa' : 'questões completas'} · recomendado: 15 ou mais`;
+  el.className = 'counter ' + (n >= 15 ? 'good' : 'warn');
+}
+function refreshCard(card) { const q = D.questions[+card.dataset.i]; card.classList.toggle('ok', !!qOk(q)); card.querySelector('.qstat').textContent = qStatus(q); updCount(); }
+function addQ() { D.questions.push(blankQ()); save(); renderQList(); const cards = document.querySelectorAll('.qcard'); const last = cards[cards.length - 1]; last.scrollIntoView({behavior:'smooth', block:'center'}); last.querySelector('textarea').focus(); }
+function compact(list) { const full = list.filter(q => q.txt.trim() || q.ops.some(o => o.trim())); while (full.length < 15) full.push(blankQ()); return full; }
+
+function parseText(txt) {
+  const out = []; let cur = null;
+  const push = () => { if (cur && (cur.txt.trim() || cur.ops.some(o => o))) out.push(cur); };
+  for (let raw of txt.split(/\r?\n/)) {
+    const line = raw.trim(); if (!line) continue;
+    const ans = line.match(/^(resposta|gabarito|correta)\s*[:\-–]?\s*\(?\s*([a-e])\s*\)?\s*\.?$/i);
+    if (ans && cur) { cur.c = L.indexOf(ans[2].toUpperCase()); continue; }
+    const op = line.match(/^(\*)?\s*\(?([a-eA-E])\s*[\)\.\-–:]\s*(.*)$/);
+    if (op && cur && (cur.txt || cur.n > 0)) {
+      const j = L.indexOf(op[2].toUpperCase()); let t = op[3];
+      let mark = !!op[1];
+      if (/\s*(\(x\)|\(correta\)|\*)\s*$/i.test(t)) { mark = true; t = t.replace(/\s*(\(x\)|\(correta\)|\*)\s*$/i, ''); }
+      cur.ops[j] = t.trim(); cur.n++; if (mark) cur.c = j; continue;
+    }
+    if (!cur || cur.n > 0) { push(); cur = {txt:'', ops:['','','','',''], c:-1, n:0}; }
+    const clean = cur.txt ? line : line.replace(/^(quest[aã]o\s*)?\d+\s*[\)\.\-–:]\s*/i, '');
+    cur.txt = cur.txt ? cur.txt + '\n' + clean : clean;
+  }
+  push();
+  return out.map(q => ({txt:q.txt, ops:q.ops, c:q.c}));
+}
+
+async function pasteDialog() {
+  const v = await modal(`<h2>Colar várias questões</h2>
+  <p class="hint">Cole no formato abaixo. Marque a correta com * antes da letra ou com uma linha “Resposta: C”.</p>
+  <pre style="background:#f4f4f0;padding:10px;border-radius:8px;font-size:13px;white-space:pre-wrap">1) Quanto vale f(2) em f(x) = 3x + 1?
+a) 5
+b) 6
+*c) 7
+d) 8
+e) 9
+
+2) Qual é a raiz de f(x) = x − 4?
+a) −4
+b) 0
+c) 1
+d) 4
+e) 8
+Resposta: D</pre>
+  <textarea id="pasteArea" rows="10" placeholder="Cole aqui as suas questões"></textarea>`,
+  [{t:'Adicionar ao banco', v:'add', cls:'pri'}, {t:'Substituir o banco', v:'rep'}, {t:'Cancelar', v:null, cls:'ghost'}]);
+  if (!v) return;
+  const qs = parseText($('#pasteArea').value);
+  if (!qs.length) { toast('Não encontrei questões no texto colado.'); return; }
+  D.questions = compact(v === 'rep' ? qs : D.questions.concat(qs)); save(); renderQList();
+  const ok = qs.filter(qOk).length;
+  toast(`${qs.length} questões lidas, ${ok} completas.${ok < qs.length ? ' Confira as marcadas em laranja.' : ''}`, 4500);
+}
+
+function renderTeams() {
+  $('#teamList').innerHTML = CARS.map((c, i) => `<div class="team" style="--c:${c.hex}">${carSVG(c.hex, i + 1)}
+   <div><small>Carro ${i + 1} · ${c.cor}</small><input type="text" data-g="${i}" value="${esc(D.groups[i].nome)}" aria-label="Nome da equipe do carro ${c.cor}"></div>
+   <label class="sw"><input type="checkbox" data-a="${i}" ${D.groups[i].ativo ? 'checked' : ''}> Participa</label></div>`).join('');
+}
+function renderSits() {
+  $('#sitList').innerHTML = D.sit.map((s, i) => `<div class="sit ${i === 11 ? 'last' : ''}"><b>${i + 1}</b><input type="text" data-s="${i}" value="${esc(s)}" aria-label="Nome do trecho ${i + 1}"></div>`).join('');
+}
+function renderCfg() { $('#cTempo').value = String(D.cfg.tempo); $('#cShuffle').checked = !!D.cfg.embaralhar; $('#cSom').checked = D.cfg.som !== false; $('#cUrl').value = D.cfg.url || ''; }
+
+function exportFile() {
+  const blob = new Blob([JSON.stringify({app:'gp-do-saber', versao:1, questions:D.questions, sit:D.sit, groups:D.groups}, null, 1)], {type:'application/json'});
+  const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = 'banco-questoes-gp-do-saber.json'; document.body.appendChild(a); a.click();
+  setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 500);
+}
+function importFile(file) {
+  const r = new FileReader();
+  r.onload = () => {
+    try {
+      const j = JSON.parse(r.result); if (!Array.isArray(j.questions)) throw 0;
+      D.questions = compact(j.questions.map(q => ({txt:String(q.txt || ''), ops:[0,1,2,3,4].map(k => String((q.ops || [])[k] || '')), c: Number.isInteger(q.c) ? q.c : -1})));
+      if (Array.isArray(j.sit) && j.sit.length === 12) D.sit = j.sit.map(String);
+      if (Array.isArray(j.groups)) j.groups.forEach((g, i) => { if (D.groups[i] && g) { D.groups[i].nome = String(g.nome || D.groups[i].nome); D.groups[i].ativo = g.ativo !== false; } });
+      save(); renderQList(); renderTeams(); renderSits(); toast('Arquivo carregado.');
+    } catch (e) { toast('Esse arquivo não é um banco de questões do GP do Saber.'); }
+  };
+  r.readAsText(file);
+}
+
+function bindHome() {
+  document.querySelector('.tabs').addEventListener('click', e => {
+    const b = e.target.closest('.tab'); if (!b) return;
+    document.querySelectorAll('.tab').forEach(t => t.setAttribute('aria-selected', t === b));
+    document.querySelectorAll('.panel').forEach(p => p.classList.toggle('on', p.id === b.dataset.tab));
+  });
+  const ql = $('#qList');
+  ql.addEventListener('input', e => {
+    const card = e.target.closest('.qcard'); if (!card) return; const q = D.questions[+card.dataset.i];
+    if (e.target.classList.contains('qtxt')) q.txt = e.target.value;
+    else if (e.target.classList.contains('opt')) q.ops[+e.target.dataset.j] = e.target.value;
+    save(); refreshCard(card);
+  });
+  ql.addEventListener('change', e => {
+    if (e.target.type !== 'radio') return; const card = e.target.closest('.qcard'); const q = D.questions[+card.dataset.i];
+    q.c = +e.target.value; card.querySelectorAll('.op').forEach((o, j) => o.classList.toggle('right', j === q.c)); save(); refreshCard(card);
+  });
+  ql.addEventListener('click', async e => {
+    if (!e.target.classList.contains('del')) return; const i = +e.target.closest('.qcard').dataset.i;
+    const q = D.questions[i];
+    if (q.txt.trim() || q.ops.some(o => o.trim())) { const ok = await modal(`<h2>Excluir a questão ${i + 1}?</h2><p>${esc(q.txt.slice(0, 160)) || 'Questão sem enunciado'}</p>`, [{t:'Excluir', v:true, cls:'red'}, {t:'Cancelar', v:false, cls:'ghost'}]); if (!ok) return; }
+    D.questions.splice(i, 1); if (!D.questions.length) D.questions.push(blankQ()); save(); renderQList();
+  });
+  $('#addQ').onclick = addQ; $('#addQ2').onclick = addQ;
+  $('#pasteQ').onclick = pasteDialog;
+  $('#sampleQ').onclick = async () => {
+    const has = D.questions.some(q => q.txt.trim());
+    let mode = 'rep';
+    if (has) { mode = await modal('<h2>Carregar questões de exemplo</h2><p>São 15 questões de Função Afim (1º ano). O que fazer com as questões que você já escreveu?</p>', [{t:'Manter as minhas e acrescentar', v:'add', cls:'pri'}, {t:'Substituir as minhas', v:'rep', cls:'red'}, {t:'Cancelar', v:null, cls:'ghost'}]); if (!mode) return; }
+    const s = SAMPLE.map(([t, o, c]) => ({txt:t, ops:o.slice(), c}));
+    D.questions = compact(mode === 'add' ? D.questions.concat(s) : s); save(); renderQList(); toast('15 questões de exemplo carregadas.');
+  };
+  $('#exportQ').onclick = exportFile;
+  $('#importF').onchange = e => { if (e.target.files[0]) importFile(e.target.files[0]); e.target.value = ''; };
+  document.querySelector('label[for=importF]').addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); $('#importF').click(); } });
+  $('#clearQ').onclick = async () => { const ok = await modal('<h2>Apagar todas as questões?</h2><p>Dica: use “Salvar em arquivo” antes, para ter uma cópia.</p>', [{t:'Apagar todas', v:true, cls:'red'}, {t:'Cancelar', v:false, cls:'ghost'}]); if (!ok) return; D.questions = Array.from({length:15}, blankQ); save(); renderQList(); };
+  $('#teamList').addEventListener('input', e => { const g = e.target.dataset.g; if (g != null) { D.groups[+g].nome = e.target.value || CARS[+g].nome; save(); } });
+  $('#teamList').addEventListener('change', e => { const a = e.target.dataset.a; if (a != null) { D.groups[+a].ativo = e.target.checked; save(); } });
+  $('#sitList').addEventListener('input', e => { const s = e.target.dataset.s; if (s != null) { D.sit[+s] = e.target.value || SIT_DEF[+s]; save(); } });
+  $('#sitReset').onclick = () => { D.sit = SIT_DEF.slice(); save(); renderSits(); };
+  $('#cTempo').onchange = e => { D.cfg.tempo = +e.target.value; save(); };
+  $('#cShuffle').onchange = e => { D.cfg.embaralhar = e.target.checked; save(); };
+  $('#cSom').onchange = e => { D.cfg.som = e.target.checked; save(); updSomBtn(); };
+  $('#cUrl').oninput = e => { D.cfg.url = e.target.value.trim(); save(); };
+  $('#goTrack').onclick = goTrack;
+  $('#resumeBtn').onclick = () => showRace();
+  $('#iAmStudent').onclick = studentEntry;
+}
+async function studentEntry() {
+  {
+    const v = await modal('<h2>Entrar na corrida</h2><p>Digite o código da sala que aparece no telão.</p><input type="text" id="codeIn" class="codeIn" maxlength="6" autocomplete="off" aria-label="Código da sala">', [{t:'Entrar', v:true, cls:'pri'}, {t:'Cancelar', v:false, cls:'ghost'}]);
+    const code = ($('#codeIn').value || '').trim().toUpperCase();
+    if (v && code) { $('#lockO').hidden = true; history.replaceState(null, '', '?sala=' + encodeURIComponent(code)); startPlayer(code); }
+  }
+}
+
+function updResume() {
+  const ok = R && R.phase !== 'end';
+  $('#resumeBar').hidden = !ok;
+  if (ok) $('#resumeInfo').textContent = R.k >= 0 ? `Pergunta ${R.k + 1} · líder no trecho ${Math.max(...R.pos)}` : 'No grid de largada';
+}
+
+async function goTrack() {
+  const n = D.questions.filter(qOk).length;
+  const nAct = D.groups.filter(g => g.ativo).length;
+  if (!n) { await modal('<h2>Nenhuma questão completa</h2><p>Escreva pelo menos uma questão com enunciado, 5 alternativas e a correta marcada. Você também pode carregar as 15 questões de exemplo.</p>', [{t:'Entendi', v:1, cls:'pri'}]); return; }
+  if (!nAct) { await modal('<h2>Nenhuma equipe participando</h2><p>Na aba “Equipes e carros”, marque “Participa” em pelo menos um carro.</p>', [{t:'Entendi', v:1, cls:'pri'}]); return; }
+  if (R && R.phase !== 'end') {
+    const v = await modal('<h2>Já existe uma corrida em andamento</h2><p>Deseja continuar de onde parou ou começar uma nova corrida com as questões atuais?</p>', [{t:'Continuar corrida', v:'c', cls:'pri'}, {t:'Nova corrida', v:'n'}, {t:'Cancelar', v:null, cls:'ghost'}]);
+    if (!v) return; if (v === 'c') { showRace(); return; }
+  }
+  if (n < 15) {
+    const v = await modal(`<h2>Só ${n} ${n > 1 ? 'questões completas' : 'questão completa'}</h2><p>Para chegar ao trecho 12 uma equipe precisa de 12 acertos. Com menos de 15 questões, pode ser que ninguém chegue ao fim. Se isso acontecer, você poderá repetir as questões com erro ou encerrar a corrida.</p>`, [{t:'Correr mesmo assim', v:true, cls:'pri'}, {t:'Voltar e escrever mais', v:false, cls:'ghost'}]);
+    if (!v) return;
+  }
+  newRace(); showRace();
+}
+
+/* =======================================================
+   CORRIDA (PROFESSOR)
+   ======================================================= */
+let R = lsGet(RKEY);
+if (R && !Array.isArray(R.hist)) R.hist = [];
+if (R && (!Array.isArray(R.pos) || !Array.isArray(R.qs))) R = null;
+let moving = false, VIS = null, lastBeep = 0;
+const saveRace = () => lsSet(RKEY, R);
+const act = () => [0,1,2,3,4,5,6,7].filter(i => R.active[i]);
+const curQ = () => R && R.k >= 0 && R.k < R.order.length ? R.qs[R.order[R.k]] : null;
+const sitName = p => p <= 0 ? 'Largada' : D.sit[p - 1];
+
+function newRace() {
+  const qs = D.questions.filter(qOk).map(q => ({txt:q.txt, ops:q.ops.slice(), c:q.c}));
+  const order = qs.map((q, i) => i); if (D.cfg.embaralhar) shuffle(order);
+  const prev = R;
+  R = {hist:[], qs, order, k:-1, pos:Array(8).fill(0), ans:{}, phase:'grid', st:CARS.map(() => ({a:0, e:0, t:0})), err:[], fin:[], last:[], qStart:0, deadline:0,
+       active:D.groups.map(g => g.ativo), owner: prev && prev.owner ? prev.owner.slice() : Array(8).fill(null), code: prev ? prev.code : null, rank:null};
+  R.owner = R.owner.map((o, i) => R.active[i] ? o : null);
+  saveRace();
+}
+
+function showRace() {
+  if (!R) return;
+  $('#home').hidden = true; $('#race').hidden = false; window.scrollTo(0, 0);
+  renderTrack(); renderRace(); updSomBtn(); broadcast();
+  if (R.phase === 'end') showPodium(false);
+}
+function showHome() { $('#race').hidden = true; $('#home').hidden = false; renderTeams(); updResume(); window.scrollTo(0, 0); }
+
+function renderTrack() {
+  const head = `<div class="thead"><div class="lblh">Equipes</div><div class="cells">${Array.from({length:13}, (_, i) => `<div class="hc ${i === 12 ? 'fin' : ''}" data-h="${i}"><b>${i === 0 ? '&#9873;' : i}</b><span>${i === 0 ? 'Largada' : esc(D.sit[i - 1])}</span></div>`).join('')}</div></div>`;
+  const lanes = act().map(i => `<div class="lane" id="lane${i}"><div class="lbl" style="--c:${CARS[i].hex}"><div class="txt"><strong>${esc(D.groups[i].nome)}</strong><small id="lp${i}"></small></div><span id="ph${i}">${phoneSVG(false)}</span></div>
+     <div class="road"><div class="startz"></div><div class="finz"></div><div class="car" id="car${i}" style="--p:0">${carSVG(CARS[i].hex, i + 1)}</div></div></div>`).join('');
+  $('#track').innerHTML = head + lanes;
+  placeCars(true);
+}
+function placeCars(instant) {
+  if (!R) return;
+  const pos = (moving && VIS) ? VIS : R.pos;
+  act().forEach(i => {
+    const c = $('#car' + i); if (!c) return;
+    if (instant) { c.style.transition = 'none'; c.style.setProperty('--p', pos[i]); void c.offsetWidth; c.style.transition = ''; }
+    else c.style.setProperty('--p', pos[i]);
+    const lp = $('#lp' + i); if (lp) lp.textContent = `Trecho ${pos[i]}/12 · ${sitName(pos[i])}`;
+  });
+  const lead = Math.max(...act().map(i => pos[i]));
+  document.querySelectorAll('.hc').forEach(h => h.classList.toggle('lead', +h.dataset.h === lead && lead > 0));
+  renderPhones();
+}
+function renderPhones() {
+  if (!R || $('#race').hidden) return;
+  act().forEach(i => { const el = $('#ph' + i); if (el) el.innerHTML = phoneSVG(isLive(i)); });
+  const n = [...H.conns].filter(e => e.conn.open).length;
+  $('#roomBadge').innerHTML = H.peer && !H.peer.destroyed && H.ok ? `Sala <b>${esc(R.code)}</b> · ${n} celular${n === 1 ? '' : 'es'}` : (H.peer && !H.peer.destroyed ? 'Abrindo sala…' : 'Celulares desligados');
+}
+
+function renderRace() {
+  if (!R) return;
+  const q = curQ(), ph = R.phase;
+  let h = '';
+  if (ph === 'grid') {
+    h = `<div class="intro"><h2>Carros no grid de largada</h2>
+      <p>Confira as equipes na pista. Se as equipes forem responder pelo celular, clique em “Conectar celulares” e mostre o QR Code. Quando todos estiverem prontos, dê a largada.</p>
+      <p>${R.order.length} questões no banco desta corrida · ${D.cfg.tempo ? 'tempo por questão: ' + fmtT(D.cfg.tempo) : 'sem limite de tempo'}.</p>
+      <div class="ctrls"><button class="btn pri big" data-act="start">Dar a largada</button><button class="btn" data-act="conn">Conectar celulares</button></div></div>`;
+  } else if (ph === 'idle') {
+    h = `<div class="intro"><h2>${R.k < 0 ? 'Largada dada!' : 'Pronto para a próxima?'}</h2><p>${R.k + 1 < R.order.length ? `A seguir: pergunta ${R.k + 2} de ${R.order.length}.` : 'As questões acabaram.'}</p>
+      <div class="ctrls"><button class="btn pri big" data-act="next">Próxima pergunta</button></div></div>`;
+  } else if (q && (ph === 'question' || ph === 'locked' || ph === 'reveal')) {
+    const rev = ph === 'reveal';
+    const tm = ph === 'question' ? (R.deadline ? `<span class="tmr" id="tmr">${Math.max(0, Math.ceil((R.deadline - Date.now()) / 1000))}</span>` : '<span class="tmr off">Sem limite</span>') : (ph === 'locked' ? '<span class="tmr low">Tempo!</span>' : '');
+    h = `<div class="qhead"><h2>Pergunta ${R.k + 1} de ${R.order.length}</h2>${tm}</div>
+      <div class="qbig">${esc(q.txt)}</div>
+      <div class="opts">${q.ops.map((o, j) => {
+        const who = rev ? act().filter(i => R.ans[i] && R.ans[i].o === j) : [];
+        return `<div class="opt ${rev ? (j === q.c ? 'right' : 'dim') : ''}"><span class="lt">${L[j]}</span><span class="ot">${esc(o)}</span>${rev ? `<span class="dots">${who.map(i => `<i style="--c:${CARS[i].hex}" title="${esc(D.groups[i].nome)}"></i>`).join('')}</span>` : ''}</div>`;
+      }).join('')}</div>`;
+    if (rev) {
+      h += `<div class="adv">${R.last.length ? R.last.map(m => `<p style="--c:${CARS[m.i].hex}"><i></i><b>${esc(D.groups[m.i].nome)}</b> avançou para o trecho ${m.to}: ${esc(sitName(m.to))}</p>`).join('') : '<p>Nenhuma equipe acertou. Ninguém avança nesta rodada.</p>'}</div>
+        <div class="ctrls"><button class="btn pri big" data-act="next" ${moving ? 'disabled' : ''}>Próxima pergunta</button></div>`;
+    } else {
+      h += `<div class="ctrls"><button class="btn pri big" data-act="reveal">Revelar resposta</button><button class="btn" data-act="skip">Pular questão</button></div>`;
+    }
+  } else if (ph === 'end') {
+    const w = R.rank && R.rank[0];
+    h = `<div class="intro"><h2>Corrida encerrada</h2><p>${w != null ? `Vitória da <b>${esc(D.groups[w].nome)}</b>.` : ''}</p>
+      <div class="ctrls"><button class="btn pri big" data-act="podium">Ver pódio</button><button class="btn" data-act="rel">Baixar relatório</button><button class="btn" data-act="again">Nova corrida</button></div></div>`;
+  }
+  $('#qPanel').innerHTML = h;
+  renderAnswers();
+  placeCars(false);
+}
+function fmtT(s) { return s < 60 ? s + ' s' : (s % 60 ? Math.floor(s / 60) + ' min e ' + (s % 60) + ' s' : (s / 60) + ' min'); }
+
+function renderAnswers() {
+  const ph = R.phase, q = curQ(), ids = act();
+  const answering = ph === 'question' || ph === 'locked';
+  const nAns = ids.filter(i => R.ans[i]).length;
+  $('#aCount').textContent = answering || ph === 'reveal' ? `${nAns} de ${ids.length} responderam` : '';
+  $('#aRows').innerHTML = ids.map(i => {
+    const a = R.ans[i]; let right = '';
+    if (answering) {
+      right = a ? `<span class="chip ok">Respondeu${a.v === 'cel' ? ' pelo celular' : ''}</span><button class="lnk" data-undo="${i}">desfazer</button>`
+               : `<span class="chip wait">Aguardando</span><span class="mini">${[...L].map((l, j) => `<button class="ltb" data-car="${i}" data-o="${j}" aria-label="Registrar ${l} para ${esc(D.groups[i].nome)}">${l}</button>`).join('')}</span>`;
+    } else if (ph === 'reveal' && q) {
+      right = a ? (a.o === q.c ? `<span class="chip ok">${L[a.o]} · acertou · +1 trecho</span>` : `<span class="chip no">${L[a.o]} · errou</span>`) : '<span class="chip no">Sem resposta</span>';
+    } else {
+      right = `<span class="chip">Trecho ${R.pos[i]}/12</span>`;
+    }
+    return `<div class="arow" style="--c:${CARS[i].hex}"><i class="dot"></i><b>${esc(D.groups[i].nome)}</b><span class="sp"></span>${right}</div>`;
+  }).join('') + (answering && nAns === ids.length ? '<p class="allok">Todas as equipes responderam. Pode revelar a resposta.</p>' : '');
+}
+
+function startLights() {
+  if (R.phase !== 'grid') return;
+  const o = $('#lightsO'); $('#lamps').innerHTML = '<div class="lamp"></div>'.repeat(5); $('#goTxt').innerHTML = '&nbsp;'; o.hidden = false;
+  const lamps = o.querySelectorAll('.lamp'); let i = 0;
+  const step = () => {
+    if (i < 5) { lamps[i].classList.add('on'); Snd.light(); i++; setTimeout(step, 700); }
+    else setTimeout(() => { lamps.forEach(l => l.classList.remove('on')); $('#goTxt').textContent = 'VAI!'; Snd.go(); setTimeout(() => { o.hidden = true; R.phase = 'idle'; saveRace(); nextQuestion(); }, 900); }, 600 + Math.random() * 600);
+  };
+  step();
+}
+
+async function nextQuestion() {
+  if (moving || !R) return;
+  if (R.k + 1 >= R.order.length) {
+    const n = R.err.length;
+    const v = await modal(`<h2>As questões acabaram</h2><p>Nenhuma equipe chegou à faixa de chegada.${n ? ` Há ${n} ${n > 1 ? 'questões' : 'questão'} em que alguma equipe errou ou não respondeu.` : ''}</p>`,
+      [n ? {t:`Repetir as ${n} questões com erro`, v:'re', cls:'pri'} : null, {t:'Encerrar: vence quem está à frente', v:'end', cls: n ? '' : 'pri'}, {t:'Cancelar', v:null, cls:'ghost'}].filter(Boolean));
+    if (v === 're') { R.order.push(...shuffle(R.err.slice())); R.err = []; }
+    else { if (v === 'end') endRace(); else { R.phase = 'idle'; saveRace(); renderRace(); } return; }
+  }
+  R.k++; R.ans = {}; R.last = []; R.phase = 'question'; R.qStart = Date.now(); R.deadline = D.cfg.tempo > 0 ? R.qStart + D.cfg.tempo * 1000 : 0; lastBeep = 0;
+  saveRace(); renderRace(); broadcast(); Snd.whoosh();
+  setTimeout(() => $('#qPanel').scrollIntoView({behavior:'smooth', block:'nearest'}), 60);
+}
+
+function registerAnswer(i, o, via) {
+  if (!R || !R.active[i] || !(o >= 0 && o < 5) || R.ans[i]) return false;
+  if (!(R.phase === 'question' || (R.phase === 'locked' && via === 'prof'))) return false;
+  R.ans[i] = {o, t: Date.now() - R.qStart, v: via};
+  saveRace(); renderAnswers(); broadcast(); Snd.click();
+  return true;
+}
+
+async function reveal() {
+  if (!R || moving || !(R.phase === 'question' || R.phase === 'locked')) return;
+  const q = curQ(), before = R.pos.slice(), ids = act(), ok = [];
+  ids.forEach(i => { const a = R.ans[i]; if (a && a.o === q.c) { ok.push(i); R.st[i].a++; R.st[i].t += a.t; } else R.st[i].e++; });
+  if (ok.length < ids.length && !R.err.includes(R.order[R.k])) R.err.push(R.order[R.k]);
+  ok.sort((x, y) => R.ans[x].t - R.ans[y].t);
+  R.last = [];
+  ok.forEach(i => { if (R.pos[i] < 12) { R.pos[i]++; R.last.push({i, to:R.pos[i]}); if (R.pos[i] === 12) R.fin.push(i); } });
+  R.hist.push({n:R.k + 1, qi:R.order[R.k], ans:JSON.parse(JSON.stringify(R.ans)), ativos:ids.slice(), ts:Date.now()});
+  R.phase = 'reveal'; saveRace();
+  moving = true; VIS = before; renderRace(); broadcast();
+  ok.length ? Snd.ok() : Snd.bad();
+  await sleep(1000);
+  if (R.last.length && $('#track').getBoundingClientRect().top < 0) { window.scrollTo({top:0, behavior:'smooth'}); await sleep(600); }
+  for (const m of R.last) {
+    VIS[m.i] = m.to; const car = $('#car' + m.i), lane = $('#lane' + m.i);
+    if (car) { car.classList.remove('go'); void car.offsetWidth; car.classList.add('go'); }
+    if (lane) { lane.classList.add('hit'); setTimeout(() => lane.classList.remove('hit'), 1200); }
+    placeCars(false); Snd.engine();
+    await sleep(600);
+  }
+  await sleep(R.last.length ? 900 : 200);
+  moving = false; VIS = null; renderRace();
+  if (!R.fin.length) $('#qPanel').scrollIntoView({behavior:'smooth', block:'nearest'});
+  if (R.fin.length) setTimeout(endRace, 500);
+}
+
+function skipQ() { if (!R || moving) return; R.phase = 'idle'; R.ans = {}; saveRace(); renderRace(); broadcast(); toast('Questão pulada. Ela não conta para ninguém.'); }
+
+function ranking() {
+  const rest = act().filter(i => !R.fin.includes(i)).sort((a, b) => R.pos[b] - R.pos[a] || R.st[b].a - R.st[a].a || R.st[a].t - R.st[b].t);
+  return R.fin.concat(rest);
+}
+function endRace() {
+  if (!R) return;
+  R.phase = 'end'; R.rank = ranking(); saveRace(); renderRace(); broadcast(); showPodium(true);
+}
+function showPodium(fx) {
+  const w = R.rank[0], g = D.groups[w];
+  const why = R.fin.length ? 'cruzou primeiro a faixa de chegada!' : 'estava mais à frente quando a corrida foi encerrada.';
+  $('#podiumBody').innerHTML = `<div class="check" style="margin:-22px -22px 14px"></div><div class="wcar">${carSVG(CARS[w].hex, w + 1)}</div>
+    <h2>${esc(g.nome)} venceu!</h2><p>O carro ${CARS[w].cor.toLowerCase()} ${why}</p><p class="hint" style="margin:0">Grande Prêmio do Saber · Autoria: Prof. Pablo Antônio</p>
+    <table class="rank"><thead><tr><th>Lugar</th><th>Equipe</th><th class="n">Trecho</th><th class="n">Acertos</th><th class="n">Erros</th></tr></thead>
+    <tbody>${R.rank.map((i, k) => `<tr style="--c:${CARS[i].hex}"><td>${k + 1}º</td><td><i></i>${esc(D.groups[i].nome)}</td><td class="n">${R.pos[i]}/12</td><td class="n">${R.st[i].a}</td><td class="n">${R.st[i].e}</td></tr>`).join('')}</tbody></table>
+    <div class="row" style="justify-content:center"><button class="btn pri" data-p="again">Nova corrida</button><button class="btn" data-p="rel">Baixar relatório</button><button class="btn" data-p="close">Ver a pista</button><button class="btn ghost" data-p="cfg">Configurar</button></div>`;
+  $('#podiumO').hidden = false;
+  if (fx) { Snd.fanfare(); confetti(); }
+}
+function confetti() {
+  if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  for (let k = 0; k < 110; k++) {
+    const d = document.createElement('div'); d.className = 'conf';
+    d.style.left = Math.random() * 100 + 'vw'; d.style.background = k % 5 === 0 ? '#ffc400' : CARS[k % 8].hex;
+    d.style.animationDuration = (2.4 + Math.random() * 2.4) + 's'; d.style.animationDelay = Math.random() * .9 + 's';
+    document.body.appendChild(d); setTimeout(() => d.remove(), 6000);
+  }
+}
+async function againRace() {
+  $('#podiumO').hidden = true;
+  if (R && R.phase !== 'end' && R.phase !== 'grid') { const ok = await modal('<h2>Começar uma nova corrida?</h2><p>A corrida atual será descartada.</p>', [{t:'Nova corrida', v:true, cls:'red'}, {t:'Cancelar', v:false, cls:'ghost'}]); if (!ok) return; }
+  newRace(); renderTrack(); renderRace(); broadcast();
+}
+
+function updSomBtn() { const b = $('#bSom'); if (b) b.textContent = D.cfg.som !== false ? 'Som ligado' : 'Som desligado'; const c = $('#cSom'); if (c) c.checked = D.cfg.som !== false; }
+
+function bindRace() {
+  $('#qPanel').addEventListener('click', e => {
+    const b = e.target.closest('[data-act]'); if (!b || b.disabled) return; Snd.ctx();
+    ({start:startLights, conn:openConnPanel, next:nextQuestion, reveal:reveal, skip:skipQ, podium:() => showPodium(false), again:againRace, rel:relDialog})[b.dataset.act]();
+  });
+  $('#aRows').addEventListener('click', e => {
+    const b = e.target.closest('.ltb'); if (b) { registerAnswer(+b.dataset.car, +b.dataset.o, 'prof'); return; }
+    const u = e.target.closest('[data-undo]'); if (u && R && (R.phase === 'question' || R.phase === 'locked')) { delete R.ans[+u.dataset.undo]; saveRace(); renderAnswers(); broadcast(); }
+  });
+  $('#podiumBody').addEventListener('click', e => {
+    const b = e.target.closest('[data-p]'); if (!b) return;
+    if (b.dataset.p === 'rel') { relDialog(); return; }
+    if (b.dataset.p === 'again') againRace(); else if (b.dataset.p === 'close') $('#podiumO').hidden = true; else { $('#podiumO').hidden = true; showHome(); }
+  });
+  $('#bConn').onclick = openConnPanel;
+  $('#bSom').onclick = () => { D.cfg.som = D.cfg.som === false; save(); updSomBtn(); if (D.cfg.som) Snd.click(); };
+  $('#bFull').onclick = () => { const d = document.documentElement; if (document.fullscreenElement) document.exitFullscreen().catch(() => {}); else if (d.requestFullscreen) d.requestFullscreen().catch(() => {}); };
+  $('#bCfg').onclick = showHome;
+  $('#bRel').onclick = relDialog;
+  setInterval(() => {
+    if (!R || R.phase !== 'question' || !R.deadline || $('#race').hidden) return;
+    const left = R.deadline - Date.now(), s = Math.ceil(left / 1000), t = $('#tmr');
+    if (t) { t.textContent = Math.max(0, s); t.classList.toggle('low', s <= 10); }
+    if (s <= 5 && s > 0 && s !== lastBeep) { lastBeep = s; Snd.beep(); }
+    if (left <= 0) { R.phase = 'locked'; saveRace(); Snd.buzz(); renderRace(); broadcast(); }
+  }, 200);
+}
+
+
+
+/* =======================================================
+   SENHA DO PROFESSOR
+   ======================================================= */
+const hashPin = p => { const t = 'gpsaber|' + p + '|pablo'; let h1 = 5381, h2 = 52711; for (let i = 0; i < t.length; i++) { const c = t.charCodeAt(i); h1 = ((h1 << 5) + h1 + c) | 0; h2 = ((h2 << 7) ^ h2 ^ (c * 2654435761)) | 0; } return (h1 >>> 0).toString(36) + '.' + (h2 >>> 0).toString(36); };
+const unlocked = () => { try { return !!D.cfg.pin && sessionStorage.getItem('gpsaber_ok') === D.cfg.pin; } catch (e) { return false; } };
+function setUnlocked(on) { try { if (on) sessionStorage.setItem('gpsaber_ok', D.cfg.pin); else sessionStorage.removeItem('gpsaber_ok'); } catch (e) {} }
+function showLock() { $('#lockO').hidden = false; $('#lockErr').textContent = ''; $('#lockPin').value = ''; setTimeout(() => $('#lockPin').focus(), 50); }
+function tryUnlock() {
+  const v = $('#lockPin').value;
+  if (hashPin(v) === D.cfg.pin) { setUnlocked(true); $('#lockO').hidden = true; Snd.click(); }
+  else { $('#lockErr').textContent = v ? 'Senha incorreta. Tente de novo.' : 'Digite a senha.'; $('#lockPin').value = ''; $('#lockPin').focus(); }
+}
+function updPinBox() {
+  const on = !!D.cfg.pin;
+  $('#pinStat').textContent = on ? 'Senha ativada.' : 'Sem senha: qualquer pessoa que usar este computador pode abrir a configuração.';
+  $('#pinStat').classList.toggle('on', on);
+  $('#pinSet').textContent = on ? 'Trocar senha' : 'Criar senha';
+  $('#pinLock').hidden = !on; $('#pinDel').hidden = !on; $('#bLock').hidden = !on;
+}
+async function setPin() {
+  let msg = '';
+  for (;;) {
+    const v = await modal(`<h2>${D.cfg.pin ? 'Trocar a senha' : 'Criar a senha do professor'}</h2>
+      <p>Use pelo menos 4 caracteres. Guarde bem: sem a senha, só dá para entrar apagando os dados deste navegador.</p>
+      <label for="pinA">Nova senha</label><input type="password" id="pinA" autocomplete="new-password">
+      <label for="pinB" style="display:block;margin-top:8px">Repita a senha</label><input type="password" id="pinB" autocomplete="new-password">
+      <p class="lockErr">${esc(msg)}</p>`, [{t:'Salvar senha', v:true, cls:'pri'}, {t:'Cancelar', v:false, cls:'ghost'}]);
+    if (!v) return;
+    const a = $('#pinA').value, b = $('#pinB').value;
+    if (a.length < 4) { msg = 'A senha precisa ter pelo menos 4 caracteres.'; continue; }
+    if (a !== b) { msg = 'As duas senhas não são iguais.'; continue; }
+    D.cfg.pin = hashPin(a); save(); setUnlocked(true); updPinBox(); toast('Senha salva. Use “Bloquear agora” ao sair do computador.', 4000); return;
+  }
+}
+function bindLock() {
+  $('#lockGo').onclick = tryUnlock;
+  $('#lockPin').addEventListener('keydown', e => { if (e.key === 'Enter') tryUnlock(); });
+  $('#lockStudent').onclick = studentEntry;
+  $('#lockForgot').onclick = async () => {
+    const v = await modal('<h2>Esqueceu a senha?</h2><p>A senha não pode ser recuperada. A única saída é apagar deste navegador as questões, os nomes das equipes, a corrida em andamento e a senha, e começar de novo.</p><p>Se você usou “Salvar em arquivo”, depois é só clicar em “Abrir arquivo” para recuperar as questões.</p>',
+      [{t:'Apagar tudo e remover a senha', v:true, cls:'red'}, {t:'Cancelar', v:false, cls:'ghost'}]);
+    if (!v) { $('#lockPin').focus(); return; }
+    try { localStorage.removeItem(KEY); localStorage.removeItem(RKEY); sessionStorage.removeItem('gpsaber_ok'); } catch (e) {}
+    location.reload();
+  };
+  $('#pinSet').onclick = setPin;
+  $('#pinLock').onclick = () => { setUnlocked(false); showLock(); };
+  $('#bLock').onclick = () => { setUnlocked(false); showLock(); };
+  $('#pinDel').onclick = async () => {
+    const v = await modal('<h2>Remover a senha?</h2><p>A configuração deste computador ficará aberta para qualquer pessoa.</p>', [{t:'Remover senha', v:true, cls:'red'}, {t:'Cancelar', v:false, cls:'ghost'}]);
+    if (!v) return; setUnlocked(false); D.cfg.pin = ''; save(); updPinBox(); toast('Senha removida.');
+  };
+  updPinBox();
+}
+
+/* =======================================================
+   RELATÓRIO DA CORRIDA
+   ======================================================= */
+function relData() {
+  const ids = act(), order = R.phase === 'end' && R.rank ? R.rank : ranking();
+  const now = new Date();
+  const equipes = order.map((i, k) => {
+    const st = R.st[i], tot = st.a + st.e;
+    return {lugar:k + 1, nome:D.groups[i].nome, cor:CARS[i].cor, trecho:R.pos[i], sit:sitName(R.pos[i]), a:st.a, e:st.e,
+      pct: tot ? Math.round(st.a * 100 / tot) : 0, tm: st.a ? (st.t / st.a / 1000).toFixed(1).replace('.', ',') : '-', chegou: R.fin.includes(i)};
+  });
+  const questoes = R.hist.map(h => {
+    const q = R.qs[h.qi], at = h.ativos || ids;
+    const resp = ids.map(i => { const a = h.ans[i]; return {i, l: a ? L[a.o] : '-', ok: !!(a && a.o === q.c)}; });
+    const ac = resp.filter(r => r.ok).length;
+    return {n:h.n, txt:q.txt, cor:L[q.c] + ') ' + q.ops[q.c], resp, ac, tot:at.length, pct: at.length ? Math.round(ac * 100 / at.length) : 0};
+  });
+  return {ids, equipes, questoes, data: now.toLocaleDateString('pt-BR') + ' ' + now.toLocaleTimeString('pt-BR', {hour:'2-digit', minute:'2-digit'}),
+    status: R.phase === 'end' ? (R.fin.length ? 'Corrida encerrada: vencedora cruzou a faixa de chegada' : 'Corrida encerrada pelo professor') : 'Corrida em andamento',
+    vencedora: R.phase === 'end' && R.rank ? D.groups[R.rank[0]].nome : '—'};
+}
+function relCSV() {
+  const d = relData(), c = v => '"' + String(v).replace(/"/g, '""').replace(/\r?\n/g, ' ') + '"';
+  const rows = [];
+  rows.push([c('Grande Prêmio do Saber – Relatório da corrida')]);
+  rows.push([c('Autoria do jogo'), c('Prof. Pablo Antônio')]);
+  rows.push([c('Data'), c(d.data)]);
+  rows.push([c('Situação'), c(d.status)]);
+  rows.push([c('Equipe vencedora'), c(d.vencedora)]);
+  rows.push([c('Questões aplicadas'), d.questoes.length]);
+  rows.push([]);
+  rows.push(['Lugar', 'Equipe', 'Cor do carro', 'Trecho alcançado (de 12)', 'Situação na pista', 'Acertos', 'Erros/sem resposta', '% de acerto', 'Tempo médio nos acertos (s)', 'Chegou à faixa final'].map(c));
+  d.equipes.forEach(e => rows.push([e.lugar + 'º', c(e.nome), c(e.cor), e.trecho, c(e.sit), e.a, e.e, e.pct + '%', c(e.tm), c(e.chegou ? 'Sim' : 'Não')]));
+  rows.push([]);
+  rows.push(['Nº', 'Enunciado', 'Resposta correta'].concat(d.ids.map(i => D.groups[i].nome), ['Equipes que acertaram', '% de acerto da turma']).map(c));
+  d.questoes.forEach(q => rows.push([q.n, c(q.txt), c(q.cor)].concat(q.resp.map(r => c(r.l === '-' ? 'sem resposta' : r.l + (r.ok ? ' (acertou)' : ' (errou)'))), [c(q.ac + ' de ' + q.tot), q.pct + '%'])));
+  const txt = '﻿' + rows.map(r => r.join(';')).join('\r\n');
+  const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([txt], {type:'text/csv;charset=utf-8'}));
+  a.download = 'relatorio-gp-do-saber-' + new Date().toISOString().slice(0, 10) + '.csv'; document.body.appendChild(a); a.click();
+  setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 500);
+  toast('Relatório baixado. Abra o arquivo no Excel ou no Google Planilhas.', 4000);
+}
+function relPrint() {
+  const d = relData();
+  $('#printArea').innerHTML = `<h1>Grande Prêmio do Saber – Relatório da corrida</h1>
+   <p class="meta">Autoria do jogo: Prof. Pablo Antônio · ${esc(d.data)} · ${esc(d.status)} · Vencedora: <b>${esc(d.vencedora)}</b> · Questões aplicadas: ${d.questoes.length}</p>
+   <h2>Desempenho das equipes</h2>
+   <table><thead><tr><th>Lugar</th><th>Equipe</th><th class="n">Trecho</th><th class="n">Acertos</th><th class="n">Erros</th><th class="n">% acerto</th><th class="n">Tempo médio (s)</th></tr></thead>
+   <tbody>${d.equipes.map(e => `<tr><td>${e.lugar}º</td><td>${esc(e.nome)} (${esc(e.cor.toLowerCase())})</td><td class="n">${e.trecho}/12</td><td class="n">${e.a}</td><td class="n">${e.e}</td><td class="n">${e.pct}%</td><td class="n">${e.tm}</td></tr>`).join('')}</tbody></table>
+   <h2>Resultado por questão</h2>
+   ${d.questoes.length ? `<table><thead><tr><th class="n">Nº</th><th>Questão</th><th>Correta</th>${d.ids.map(i => `<th>${esc(D.groups[i].nome)}</th>`).join('')}<th class="n">% turma</th></tr></thead>
+   <tbody>${d.questoes.map(q => `<tr class="q"><td class="n">${q.n}</td><td>${esc(q.txt)}</td><td>${esc(q.cor)}</td>${q.resp.map(r => `<td>${r.l === '-' ? '—' : r.l + (r.ok ? ' ✓' : ' ✗')}</td>`).join('')}<td class="n">${q.pct}%</td></tr>`).join('')}</tbody></table>` : '<p>Nenhuma questão foi revelada ainda.</p>'}`;
+  document.body.classList.add('printing');
+  const done = () => { document.body.classList.remove('printing'); window.removeEventListener('afterprint', done); };
+  window.addEventListener('afterprint', done);
+  setTimeout(() => { try { window.print(); } catch (e) {} setTimeout(done, 1500); }, 50);
+}
+async function relDialog() {
+  if (!R) return;
+  $('#podiumO').hidden = true;
+  const v = await modal(`<h2>Relatório da corrida</h2><p>Traz a classificação, os acertos e erros de cada equipe e a resposta de cada equipe em cada questão revelada${R.phase === 'end' ? '' : ' até agora (a corrida ainda não terminou)'}.</p>`,
+    [{t:'Baixar planilha (Excel)', v:'csv', cls:'pri'}, {t:'Imprimir ou salvar em PDF', v:'pdf'}, {t:'Cancelar', v:null, cls:'ghost'}]);
+  if (v === 'csv') relCSV(); else if (v === 'pdf') relPrint();
+}
+
+/* =======================================================
+   CONEXÃO COM OS CELULARES (PeerJS / WebRTC)
+   ======================================================= */
+const H = {peer:null, ok:false, conns:new Set(), tries:0, err:''};
+const genCode = () => Array.from({length:5}, () => 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789'[Math.floor(Math.random() * 32)]).join('');
+const isLive = i => [...H.conns].some(e => e.car === i && e.conn.open && R && R.owner[i] === e.token);
+function baseUrl() {
+  if (/^https?:$/.test(location.protocol)) return location.origin + location.pathname;
+  return (D.cfg.url || '').split('?')[0];
+}
+
+function openConnPanel() {
+  $('#connP').hidden = false;
+  if (!H.peer || H.peer.destroyed) openRoom();
+  renderConn();
+}
+function openRoom() {
+  if (!window.Peer) { H.err = 'nolib'; renderConn(); return; }
+  if (!R.code) { R.code = genCode(); saveRace(); }
+  H.tries = 0; H.err = ''; mkPeer(R.code);
+}
+function mkPeer(code) {
+  H.ok = false;
+  let p;
+  try { p = new window.Peer(PREFIX + code, {config:{iceServers:ICE}}); } catch (e) { H.err = 'falha'; renderConn(); return; }
+  H.peer = p; renderConn(); renderPhones();
+  p.on('open', () => { H.ok = true; H.err = ''; H.tries = 0; renderConn(); renderPhones(); });
+  p.on('connection', conn => {
+    const e = {conn, token:null, car:null};
+    conn.on('open', () => { H.conns.add(e); renderConn(); renderPhones(); });
+    conn.on('data', m => { try { onMsg(e, m); } catch (er) { console.error(er); } });
+    conn.on('close', () => { H.conns.delete(e); renderConn(); renderPhones(); });
+    conn.on('error', () => {});
+  });
+  p.on('disconnected', () => { H.ok = false; renderPhones(); if (!p.destroyed) setTimeout(() => { try { if (!p.destroyed) p.reconnect(); } catch (e) {} }, 1500); });
+  p.on('error', err => {
+    if (err.type === 'unavailable-id') {
+      p.destroy(); H.tries++;
+      if (H.tries < 5) { H.err = 'retomando'; renderConn(); setTimeout(() => mkPeer(code), 3000); }
+      else { R.code = genCode(); saveRace(); H.tries = 0; mkPeer(R.code); }
+    } else if (err.type === 'peer-unavailable') { /* ignora */ }
+    else { H.err = err.type || 'erro'; renderConn(); }
+  });
+}
+function closeRoom() {
+  H.conns.forEach(e => { try { e.conn.close(); } catch (er) {} });
+  H.conns.clear(); if (H.peer) { try { H.peer.destroy(); } catch (e) {} } H.peer = null; H.ok = false; renderConn(); renderPhones();
+}
+
+function renderConn() {
+  if ($('#connP').hidden) return;
+  let h = '<h2>Conectar os celulares das equipes</h2>';
+  if (H.err === 'nolib') {
+    h += `<div class="errbox">O componente de conexão não carregou. Verifique se este computador está com internet e recarregue a página.</div><p>Enquanto isso, a corrida funciona normalmente: as equipes mostram a letra e você registra no painel “Respostas das equipes”.</p>`;
+    $('#connBody').innerHTML = h; return;
+  }
+  const url = baseUrl(), link = url ? url + '?sala=' + R.code : '';
+  if (!H.ok) {
+    h += `<p>${H.err === 'retomando' ? `Recuperando a sala <b>${esc(R.code)}</b>… (isso leva alguns segundos depois de recarregar a página)` : H.err ? `<span class="errbox" style="display:block">Não foi possível abrir a sala (${esc(H.err)}). Verifique a internet. </span>` : 'Abrindo a sala na internet…'}</p>`;
+    if (H.err && H.err !== 'retomando') h += '<button class="btn pri" data-c="retry">Tentar de novo</button>';
+    $('#connBody').innerHTML = h; return;
+  }
+  h += `<div class="connGrid"><div class="qr">${link ? `<img alt="QR Code para entrar na sala ${esc(R.code)}" onerror="this.parentNode.textContent='Não foi possível gerar o QR Code. Use o link ou o código.'" src="https://api.qrserver.com/v1/create-qr-code/?size=300x300&margin=8&data=${encodeURIComponent(link)}">` : 'Sem endereço público para gerar o QR Code'}</div>
+   <div><div>Código da sala</div><div class="code">${esc(R.code)}</div>
+   ${link ? `<div class="linkbox"><input type="text" readonly value="${esc(link)}" id="linkIn" aria-label="Link da sala"><button class="btn" data-c="copy">Copiar</button></div>` :
+     `<div class="warnbox">O jogo foi aberto direto do arquivo, então os celulares não têm onde entrar. Publique o arquivo na internet (por exemplo, no GitHub Pages) e abra o jogo pelo endereço publicado, ou preencha “Endereço público do jogo” em Configurar → Regras e ajustes.</div>`}
+   <ol class="steps"><li>As equipes ligam a internet do celular (dados móveis costumam funcionar melhor que o Wi‑Fi da escola).</li><li>Leem o QR Code ou abrem o link. Também dá para abrir o jogo, tocar em “Sou aluno” e digitar o código.</li><li>Cada equipe toca no carro da sua cor.</li></ol></div></div>
+   <table class="ctable"><tbody>${act().map(i => { const live = isLive(i), own = R.owner[i];
+     return `<tr style="--c:${CARS[i].hex}"><td><i></i><b>${esc(D.groups[i].nome)}</b></td><td>${live ? '<span class="chip ok">Celular conectado</span>' : own ? '<span class="chip wait">Escolhido, celular desconectado</span>' : '<span class="chip">Livre</span>'}</td><td style="text-align:right">${own ? `<button class="lnk" data-free="${i}">Liberar carro</button>` : ''}</td></tr>`; }).join('')}</tbody></table>
+   <div class="row"><button class="lnk" data-c="close" style="color:var(--no)">Desligar os celulares</button></div>`;
+  $('#connBody').innerHTML = h;
+}
+
+function sendTo(e, msg) { try { if (e.conn.open) e.conn.send(msg); } catch (er) {} }
+function stateFor(e) {
+  const q = curQ(), ph = R ? R.phase : 'grid';
+  const showQ = R && q && (ph === 'question' || ph === 'locked' || ph === 'reveal');
+  const my = R && e.car != null ? R.ans[e.car] : null;
+  return {t:'state', phase:ph, qid: R ? R.k : -1, you: e.car, sit: D.sit,
+    cars: CARS.map((c, i) => ({nome:D.groups[i].nome, hex:c.hex, cor:c.cor, ativo: R ? !!R.active[i] : D.groups[i].ativo, livre: !(R && R.owner[i] && R.owner[i] !== e.token), pos: R ? R.pos[i] : 0, a: R ? R.st[i].a : 0})),
+    q: showQ ? {n:R.k + 1, total:R.order.length, txt:q.txt, ops:q.ops} : null,
+    left: R && ph === 'question' && R.deadline ? Math.max(0, R.deadline - Date.now()) : null,
+    mine: my ? my.o : null, right: ph === 'reveal' && q ? q.c : null,
+    rank: ph === 'end' ? R.rank : null, fin: R ? R.fin.length > 0 : false};
+}
+function broadcast() { if (!H.peer) return; H.conns.forEach(e => sendTo(e, stateFor(e))); renderConn(); renderPhones(); }
+function onMsg(e, m) {
+  if (!m || typeof m !== 'object' || !R) return;
+  if (m.t === 'hello') {
+    e.token = String(m.token || '').slice(0, 40) || null;
+    const i = e.token ? R.owner.indexOf(e.token) : -1; e.car = i >= 0 ? i : null;
+    sendTo(e, stateFor(e)); renderConn(); renderPhones();
+  } else if (m.t === 'join') {
+    const i = +m.car;
+    if (!e.token || !(i >= 0 && i < 8) || !R.active[i]) return sendTo(e, {t:'err', msg:'Esse carro não está na corrida.'});
+    if (R.owner[i] && R.owner[i] !== e.token) return sendTo(e, {t:'err', msg:'Esse carro já foi escolhido por outra equipe.'});
+    R.owner = R.owner.map(o => o === e.token ? null : o); R.owner[i] = e.token; e.car = i;
+    H.conns.forEach(o => { if (o.token === e.token) o.car = i; });
+    saveRace(); broadcast(); toast(`${D.groups[i].nome} entrou pelo celular.`);
+  } else if (m.t === 'leave') {
+    if (e.car != null && R.owner[e.car] === e.token) R.owner[e.car] = null;
+    H.conns.forEach(o => { if (o.token === e.token) o.car = null; });
+    saveRace(); broadcast();
+  } else if (m.t === 'ans') {
+    if (e.car == null || R.owner[e.car] !== e.token || m.qid !== R.k) return;
+    registerAnswer(e.car, +m.o, 'cel');
+    sendTo(e, stateFor(e));
+  }
+}
+function bindConn() {
+  $('#connClose').onclick = () => $('#connP').hidden = true;
+  $('#connBody').addEventListener('click', e => {
+    const b = e.target.closest('button'); if (!b) return;
+    if (b.dataset.c === 'copy') { const v = $('#linkIn').value; (navigator.clipboard ? navigator.clipboard.writeText(v) : Promise.reject()).then(() => toast('Link copiado.')).catch(() => { $('#linkIn').select(); toast('Selecione e copie o link.'); }); }
+    else if (b.dataset.c === 'retry') { closeRoom(); openRoom(); }
+    else if (b.dataset.c === 'close') { closeRoom(); }
+    else if (b.dataset.free != null) { const i = +b.dataset.free; R.owner[i] = null; H.conns.forEach(o => { if (o.car === i) o.car = null; }); saveRace(); broadcast(); }
+  });
+}
+
+/* =======================================================
+   CELULAR DO ALUNO
+   ======================================================= */
+function startPlayer(code) {
+  MODE = 'player';
+  $('#home').hidden = true; $('#race').hidden = true; $('#player').hidden = false;
+  Object.assign(P, {code: code.toUpperCase().replace(/[^A-Z0-9]/g, ''), peer:null, conn:null, st:null, deadline:0, tm:null, lastKey:'', som: lsGet('gpsaber_som') !== false});
+  let tk = null; try { tk = localStorage.getItem(TKEY); } catch (e) {}
+  if (!tk) { tk = 't' + Math.random().toString(36).slice(2, 12) + Date.now().toString(36); try { localStorage.setItem(TKEY, tk); } catch (e) {} }
+  P.token = tk;
+  $('#pCode').innerHTML = 'Sala <b>' + esc(P.code) + '</b>';
+  $('#pSom').textContent = P.som ? 'Som ligado' : 'Som desligado';
+  $('#pSom').onclick = () => { P.som = !P.som; lsSet('gpsaber_som', P.som); $('#pSom').textContent = P.som ? 'Som ligado' : 'Som desligado'; if (P.som) Snd.click(); };
+  $('#pMain').addEventListener('click', pClick);
+  pRender();
+  let waited = 0;
+  const wait = () => { if (window.Peer) pConnect(); else if ((waited += 300) > 12000) pStatus('Não foi possível carregar a conexão. Verifique a internet do celular e recarregue a página.'); else setTimeout(wait, 300); };
+  wait();
+  setInterval(pTick, 250);
+}
+function pStatus(msg) { const s = $('#pStatus'); s.hidden = !msg; s.textContent = msg || ''; }
+function pLater(fn, ms) { clearTimeout(P.tm); P.tm = setTimeout(fn, ms); }
+function pConnect() {
+  pStatus('Conectando à sala ' + P.code + '…');
+  if (P.peer && !P.peer.destroyed) { pOpen(); return; }
+  let p; try { p = new window.Peer({config:{iceServers:ICE}}); } catch (e) { pStatus('Falha ao iniciar a conexão.'); return; }
+  P.peer = p;
+  p.on('open', pOpen);
+  p.on('disconnected', () => { setTimeout(() => { try { if (!p.destroyed) p.reconnect(); } catch (e) {} }, 1500); });
+  p.on('error', err => {
+    if (err.type === 'peer-unavailable') { pStatus('Sala ' + P.code + ' não encontrada. Confira o código ou aguarde o professor abrir a sala. Tentando de novo…'); pLater(pOpen, 4000); }
+    else if (err.type === 'network' || err.type === 'server-error' || err.type === 'socket-error' || err.type === 'socket-closed') { pStatus('Sem conexão com a internet. Tentando de novo…'); pLater(() => { try { p.destroy(); } catch (e) {} P.peer = null; pConnect(); }, 4000); }
+    else { pStatus('Problema de conexão (' + err.type + '). Tentando de novo…'); pLater(pOpen, 4000); }
+  });
+}
+function pOpen() {
+  if (!P.peer || P.peer.destroyed || !P.peer.open) { pLater(pConnect, 1500); return; }
+  if (P.conn && P.conn.open) return;
+  const c = P.peer.connect(PREFIX + P.code, {reliable:true}); P.conn = c;
+  c.on('open', () => { pStatus(''); c.send({t:'hello', token:P.token}); });
+  c.on('data', pData);
+  c.on('close', () => { if (P.conn === c) { P.conn = null; pStatus('Conexão perdida. Reconectando…'); pLater(pOpen, 2500); } });
+  c.on('error', () => {});
+}
+function pSend(m) { if (P.conn && P.conn.open) { P.conn.send(m); return true; } pStatus('Sem conexão no momento. Reconectando…'); return false; }
+function pData(m) {
+  if (!m || typeof m !== 'object') return;
+  if (m.t === 'err') { toast(m.msg); return; }
+  if (m.t !== 'state') return;
+  const prev = P.st; P.st = m;
+  if (m.left != null) P.deadline = Date.now() + m.left; else P.deadline = 0;
+  const key = m.phase + ':' + m.qid;
+  if (key !== P.lastKey && prev && m.you != null) {
+    if (m.phase === 'question') { Snd.whoosh(); if (navigator.vibrate) navigator.vibrate(120); }
+    else if (m.phase === 'reveal') { m.mine === m.right ? Snd.ok() : Snd.bad(); if (m.mine === m.right) setTimeout(() => Snd.engine(), 500); }
+    else if (m.phase === 'locked') Snd.buzz();
+    else if (m.phase === 'end') { if (m.rank && m.rank[0] === m.you) { Snd.fanfare(); confetti(); } else Snd.light(); }
+  }
+  P.lastKey = key;
+  pRender();
+}
+function pTick() {
+  const t = $('#pT'); if (!t || !P.deadline) return;
+  const s = Math.max(0, Math.ceil((P.deadline - Date.now()) / 1000)); t.textContent = s + ' s'; t.classList.toggle('low', s <= 10);
+}
+function pRender() {
+  const st = P.st, m = $('#pMain');
+  if (!st) { m.innerHTML = `<div class="pcard"><h2>Grande Prêmio do Saber</h2><p>Entrando na sala <b>${esc(P.code)}</b>…</p><p class="pmsg">Deixe esta página aberta.</p></div>`; return; }
+  if (st.you == null) {
+    const ids = st.cars.map((c, i) => i).filter(i => st.cars[i].ativo);
+    m.innerHTML = `<h2 style="font-size:24px">Escolha o carro da sua equipe</h2><p class="pmsg" style="text-align:left;margin:0">Toque no carro com a cor combinada com o professor.</p>
+      <div class="pcars">${ids.map(i => { const c = st.cars[i]; return `<button class="pcar" data-car="${i}" style="--c:${c.hex}" ${c.livre ? '' : 'disabled'}>${carSVG(c.hex, i + 1)}<b>${esc(c.nome)}</b><small>${c.livre ? 'Carro ' + c.cor.toLowerCase() : 'Já escolhido'}</small></button>`; }).join('')}</div>`;
+    return;
+  }
+  const me = st.cars[st.you], pos = me.pos;
+  let h = `<div class="pteam" style="--c:${me.hex}">${carSVG(me.hex, st.you + 1)}<div><b>${esc(me.nome)}</b><small>Trecho ${pos} de 12 · ${esc(pos ? st.sit[pos - 1] : 'Largada')}</small>${st.phase === 'grid' ? '<button class="lnk" data-swap="1" style="padding:4px 0">Trocar de carro</button>' : ''}</div></div>
+    <div class="pprog" style="--c:${me.hex}" aria-label="Progresso: trecho ${pos} de 12">${Array.from({length:13}, (_, k) => `<span class="pc ${k <= pos ? 'done' : ''} ${k === pos ? 'cur' : ''} ${k === 12 && pos < 12 ? 'fl' : ''}"></span>`).join('')}</div>`;
+  const ph = st.phase, q = st.q;
+  if (ph === 'grid') h += `<div class="pcard"><h2>Tudo pronto!</h2><p>Seu carro está no grid de largada. Aguarde o professor dar a largada.</p></div>`;
+  else if (ph === 'idle') h += `<div class="pcard"><h2>Atenção!</h2><p>A próxima pergunta já vai aparecer. Discutam juntos antes de responder.</p></div>`;
+  else if (q && (ph === 'question' || ph === 'locked' || ph === 'reveal')) {
+    const done = st.mine != null;
+    let ban = '';
+    if (ph === 'reveal') ban = st.mine === st.right ? `<div class="banner ok">Acertou! Seu carro avançou para o trecho ${pos}.</div>` : `<div class="banner no">${done ? 'Não foi dessa vez.' : 'Sua equipe não respondeu.'} A correta era ${L[st.right]}.</div>`;
+    else if (ph === 'locked') ban = `<div class="banner neu">Tempo esgotado! ${done ? 'Resposta enviada.' : 'Sua equipe não respondeu a tempo.'}</div>`;
+    h += `<div class="pcard">${ban}<div class="row" style="justify-content:space-between;margin-bottom:6px"><b>Pergunta ${q.n} de ${q.total}</b>${ph === 'question' && st.left != null ? '<span class="ptimer" id="pT"></span>' : ''}</div>
+      <p class="pq">${esc(q.txt)}</p>
+      <div class="pops">${q.ops.map((o, j) => {
+        let cls = '';
+        if (ph === 'reveal') cls = j === st.right ? 'right' : (j === st.mine ? 'wrong' : '');
+        else if (j === st.mine || j === P.pending) cls = 'sel';
+        const dis = ph !== 'question' || done || P.pending != null;
+        return `<button class="pop ${cls}" data-o="${j}" ${dis ? 'disabled' : ''}><span class="lt">${L[j]}</span><span class="ot">${esc(o)}</span></button>`;
+      }).join('')}</div>
+      ${ph === 'question' ? `<p class="pmsg">${done ? 'Resposta enviada! Aguardem a revelação no telão.' : 'Toque na alternativa escolhida pela equipe. Só vale uma resposta.'}</p>` : ''}</div>`;
+    if (ph !== 'question' || done) P.pending = null;
+  } else if (ph === 'end') {
+    const place = st.rank ? st.rank.indexOf(st.you) + 1 : 0, w = st.rank ? st.cars[st.rank[0]] : null;
+    h += `<div class="pcard"><div class="banner ${place === 1 ? 'ok' : 'neu'}">${place === 1 ? 'Sua equipe venceu o Grande Prêmio!' : `Sua equipe terminou em ${place}º lugar.`}</div>
+      ${w ? `<p>Vencedora: <b>${esc(w.nome)}</b>.</p>` : ''}<p>Acertos da sua equipe: <b>${me.a}</b>.</p><p class="pmsg">Olhem o pódio no telão.</p></div>`;
+  }
+  m.innerHTML = h; pTick();
+}
+function pClick(e) {
+  Snd.ctx();
+  const car = e.target.closest('.pcar'); if (car && !car.disabled) { if (pSend({t:'join', car:+car.dataset.car})) Snd.click(); return; }
+  const sw = e.target.closest('[data-swap]'); if (sw) { pSend({t:'leave'}); return; }
+  const op = e.target.closest('.pop'); if (op && !op.disabled && P.st && P.st.phase === 'question' && P.st.mine == null && P.pending == null) {
+    if (pSend({t:'ans', qid:P.st.qid, o:+op.dataset.o})) { P.pending = +op.dataset.o; Snd.click(); pRender(); setTimeout(() => { if (P.pending != null && P.st && P.st.mine == null) { P.pending = null; pRender(); } }, 6000); }
+  }
+}
+
+/* =======================================================
+   INÍCIO
+   ======================================================= */
+const sala = new URLSearchParams(location.search).get('sala');
+if (sala) startPlayer(sala);
+else {
+  renderHeroCars(); renderQList(); renderTeams(); renderSits(); renderCfg();
+  bindHome(); bindRace(); bindConn(); bindLock(); updResume();
+  if (D.cfg.pin && !unlocked()) showLock();
+}
+})();
+</script>
+</body>
+</html>
